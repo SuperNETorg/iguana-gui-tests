@@ -10,6 +10,7 @@
     "postinstall": "node nightwatch.conf.js",
     "test": "./node_modules/.bin/nightwatch --env local -t test/e2e/index.js",
     "clean-coind": "./daemon_scripts/clean.sh",
+    "encrypt-coind": "./daemon_scripts/encrypt.sh",
     "ie": "./node_modules/.bin/nightwatch -e ie11",
     "sauce": "./node_modules/.bin/nightwatch -e chrome,ie11,android_s4_emulator,iphone_6_simulator",
     "upload": "node test/e2e/upload_screenshots_to_s3.js",
