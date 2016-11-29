@@ -1,0 +1,44 @@
+{
+  "name": "iguana-tests",
+  "version": "0.0.1",
+  "description": "Iguana GUI Nightwatch testing suite",
+  "main": "index.js",
+  "engines": {
+    "node": "4.4.6"
+  },
+  "scripts": {
+    "postinstall": "node nightwatch.conf.js",
+    "test": "./node_modules/.bin/nightwatch --env local -t test/e2e/index.js",
+    "clean-coind": "./daemon_scripts/clean.sh",
+    "ie": "./node_modules/.bin/nightwatch -e ie11",
+    "sauce": "./node_modules/.bin/nightwatch -e chrome,ie11,android_s4_emulator,iphone_6_simulator",
+    "upload": "node test/e2e/upload_screenshots_to_s3.js",
+    "e2e": "npm run sauce; npm run upload",
+    "dev": "./node_modules/.bin/nodemon -w test/index.html --delay 250ms --exec 'npm run upload'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/.git"
+  },
+  "author": "SuperNET",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/issues"
+  },
+  "homepage": "https://github.com/#readme",
+  "dependencies": {
+    "nightwatch": "^0.9.8",
+    "saucelabs": "^1.3.0",
+    "selenium-download": "^2.0.6"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.6.2",
+    "env2": "^2.1.1",
+    "mime-types": "^2.1.11",
+    "nodemon": "^1.10.2"
+  },
+  "keywords": [
+    "SuperNET",
+    "Iguana"
+  ]
+}
