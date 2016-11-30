@@ -8,9 +8,10 @@
   },
   "scripts": {
     "postinstall": "node nightwatch.conf.js",
-    "test": "./node_modules/.bin/nightwatch --env local -t test/e2e/index.js",
+    "test": "./node_modules/.bin/nightwatch --env local -t",
     "clean-coind": "./daemon_scripts/clean.sh",
     "encrypt-coind": "./daemon_scripts/encrypt.sh",
+    "signup-unencrypted": "./daemon_scripts/signup-unencrypted.sh",
     "ie": "./node_modules/.bin/nightwatch -e ie11",
     "sauce": "./node_modules/.bin/nightwatch -e chrome,ie11,android_s4_emulator,iphone_6_simulator",
     "upload": "node test/e2e/upload_screenshots_to_s3.js",
@@ -19,16 +20,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/.git"
+    "url": "git+https://github.com/SuperNETorg/iguana-gui-tests.git"
   },
   "author": "SuperNET",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/issues"
+    "url": "https://github.com/SuperNETorg/iguana-gui-tests/issues"
   },
-  "homepage": "https://github.com/#readme",
+  "homepage": "https://github.com/SuperNETorg/iguana-gui-tests#readme",
   "dependencies": {
     "nightwatch": "^0.9.8",
+    "nightwatch-custom-commands-assertions": "^1.0.5",
     "saucelabs": "^1.3.0",
     "selenium-download": "^2.0.6"
   },

@@ -12,6 +12,7 @@ echo "$syscoin removed"
 #echo "$mazacoin removed"
 
 ./bin/syscoind -regtest -daemon
+sleep 4
 
-#cd ../
-#npm test
+cd ../
+npm test test/e2e/signup-unencrypted.js

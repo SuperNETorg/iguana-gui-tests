@@ -12,6 +12,8 @@ const BINPATH = './node_modules/nightwatch/bin/'; // change if required.
 const SCREENSHOT_PATH = "./node_modules/nightwatch/screenshots/" + PKG.version + "/"
 
 const config = { // we use a nightwatch.conf.js file so we can include comments and helper functions
+  "custom_commands_path" : "node_modules/nightwatch-custom-commands-assertions/js/commands",
+  "custom_assertions_path" : "node_modules/nightwatch-custom-commands-assertions/js/assertions",
   "src_folders": [
     "test/e2e"     // we use /test as the name of our test directory by default. so test/e2e for e2e
   ],
@@ -65,8 +67,8 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
           "args": [
             `Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46
             (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3`,
-            "--window-size=1900,1000"
-            //"--window-size=640,1136" // iphone 5
+            //"--window-size=1900,1000"
+            "--window-size=1024,768"
           ]
         },
         "javascriptEnabled": true,
