@@ -10,6 +10,11 @@ var extend = function(target) {
   return target;
 };
 
+/*
+ * Description: it should try and fail to encrypt already encrypted sys wallet
+ *
+ */
+
 // tests
 module.exports = extend(module.exports, require("./login-page-check"));
 module.exports = extend(module.exports, require("./signup-page-check"));

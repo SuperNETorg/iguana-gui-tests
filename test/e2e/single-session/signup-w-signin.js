@@ -10,6 +10,12 @@ var extend = function(target) {
   return target;
 };
 
+/*
+ * Description:
+ *   1) encrypt sys wallet w/ 12 word random passphrase
+ *   2) login into sys wallet
+ */
+
 // tests
 module.exports = extend(module.exports, require("./signup-success"));
 module.exports = extend(module.exports, require("./add-wallet-2nd-time"));

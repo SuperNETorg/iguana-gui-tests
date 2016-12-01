@@ -10,14 +10,8 @@ var extend = function(target) {
   return target;
 };
 
-/*
- * Description: it should encrypt unencrypted sys wallet
- *
- */
-
 // tests
 module.exports = extend(module.exports, require("./login-page-check"));
-module.exports = extend(module.exports, require("./signup-page-check"));
 module.exports = extend(module.exports, require("./add-wallet"));
-module.exports = extend(module.exports, require("./signup-passphrase"));
-module.exports = extend(module.exports, require("./signup-passphrase-success"));
+module.exports = extend(module.exports, require("./signin-dashboard"));
+module.exports = extend(module.exports, require("./dashboard-check-empty-sys-wallet"));

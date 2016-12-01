@@ -9,7 +9,7 @@ var conf = require('../../../nightwatch.conf.js'),
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/login-add-wallet-' + step +'.png';
+  return 'screenshots/login-add-wallet-sys-' + step +'.png';
 }
 
 module.exports = {

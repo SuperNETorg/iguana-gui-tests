@@ -23,7 +23,7 @@ module.exports = {
       .keys(browser.Keys.ESCAPE)
       .pause(5000, function() {
         console.log('restart syscoind')
-        child = exec('./daemon_scripts/bin/syscoind -regtest -daemon', function (error, stdout, stderr) {
+        child = exec('./daemon_scripts/bin/syscoind -regtest -daemon', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {

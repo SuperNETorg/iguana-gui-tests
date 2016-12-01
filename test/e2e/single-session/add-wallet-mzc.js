@@ -9,7 +9,7 @@ var conf = require('../../../nightwatch.conf.js'),
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/login-add-wallet-sys-2nd-time' + step +'.png';
+  return 'screenshots/login-add-wallet-mzc-' + step +'.png';
 }
 
 module.exports = {
@@ -29,15 +29,15 @@ module.exports = {
           .saveScreenshot(getScreenshotUrl())
           .clearValue('.quick-search input[type=text]')
         browser
-          .verify.visible('.supported-coins-repeater-inner .coin.sys')
+          .verify.visible('.supported-coins-repeater-inner .coin.mzc')
           .verify.cssClassPresent('.btn-next', 'disabled')
         browser
-          .setValue('.quick-search input[type=text]', ['syscoin'])
+          .setValue('.quick-search input[type=text]', ['mazacoin'])
           .pause(500)
-          .verify.visible('.supported-coins-repeater-inner .coin.sys')
-          .click('.supported-coins-repeater-inner .coin.sys')
+          .verify.visible('.supported-coins-repeater-inner .coin.mzc')
+          .click('.supported-coins-repeater-inner .coin.mzc')
           .verify.cssClassNotPresent('.btn-next', 'disabled')
-          .verify.cssClassPresent('.supported-coins-repeater-inner .coin.sys', 'active')
+          .verify.cssClassPresent('.supported-coins-repeater-inner .coin.mzc', 'active')
           .saveScreenshot(getScreenshotUrl())
           .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
