@@ -42,12 +42,12 @@ module.exports = {
           .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
           .saveScreenshot(getScreenshotUrl())
-        browser
+        /*browser
           .clearValue('#passphrase')
           .setValue('#passphrase', ['test test'])
           .pause(250)
           .saveScreenshot(getScreenshotUrl())
-          /*.getAttribute('.btn-signin', 'disabled', function(result) {
+          .getAttribute('.btn-signin', 'disabled', function(result) {
             console.log('singin button should be enabled')
             this.verify.equal(result.value, null)
           })

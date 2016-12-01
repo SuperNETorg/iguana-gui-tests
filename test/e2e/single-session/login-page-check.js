@@ -13,7 +13,7 @@ function getScreenshotUrl() {
 }
 
 module.exports = {
-  'test IguanaGUI Index page': function(browser) {
+  'test IguanaGUI Index page check': function(browser) {
     browser
       .url(iguanaGUIFolder + 'index.html#/login')
       .waitForElementVisible('body')

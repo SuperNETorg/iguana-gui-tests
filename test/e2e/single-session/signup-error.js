@@ -14,3 +14,5 @@ var extend = function(target) {
 module.exports = extend(module.exports, require("./login-page-check"));
 module.exports = extend(module.exports, require("./signup-page-check"));
 module.exports = extend(module.exports, require("./add-wallet"));
+module.exports = extend(module.exports, require("./signup-passphrase"));
+module.exports = extend(module.exports, require("./signup-passphrase-error"));
