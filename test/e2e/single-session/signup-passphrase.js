@@ -1,9 +1,10 @@
 var conf = require('../../../nightwatch.conf.js'),
     iguanaGUIFolder = 'file:///home/pbca/Iguana-GUI/compiled/dev/',
     step = -1,
-    generatedPassphraseText,
     chalk = require('chalk'),
     util = require('util'),
+    fs = require('fs'),
+    generatedPassphraseText,
     exec = require('child_process').exec,
     child;
 
@@ -31,6 +32,7 @@ module.exports = {
       .getAttribute('.btn-add-account', 'disabled', function(result) {
         console.log('button add account should be disabled')
         this.verify.equal(result.value, 'true')
+        generatedPassphraseText = fs.readFileSync('savedpassphrase.txt', 'utf-8')
       })
       .saveScreenshot(getScreenshotUrl())
       .setValue('#passphrase', generatedPassphraseText)

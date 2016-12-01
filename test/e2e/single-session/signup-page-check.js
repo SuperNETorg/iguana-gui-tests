@@ -4,6 +4,7 @@ var conf = require('../../../nightwatch.conf.js'),
     generatedPassphraseText,
     chalk = require('chalk'),
     util = require('util'),
+    fs = require('fs'),
     exec = require('child_process').exec,
     child;
 
@@ -36,6 +37,7 @@ module.exports = {
           console.log(chalk.green(' ✔') + ' Passphrase is correct')
         else
           console.log(chalk.red(' ✖') + ' Passphrase is incorrect!')
+        fs.writeFileSync('savedpassphrase.txt', generatedPassphraseText, 'utf-8')
       })
       .click('label.checkbox-label')
       .getAttribute('.btn-verify-passphrase', 'disabled', function(result) {

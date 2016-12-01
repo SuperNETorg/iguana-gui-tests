@@ -142,6 +142,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     }*/
   }
 }
+
 module.exports = config;
 
 /**

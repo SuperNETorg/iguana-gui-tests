@@ -21,11 +21,11 @@ module.exports = {
       .verify.containsText('.msg-body span', 'sys wallet is created. Login to access it.')
       .saveScreenshot(getScreenshotUrl())
       .keys(browser.Keys.ESCAPE)
-      .pause(3000, function() {
+      .pause(5000, function() {
         console.log('restart syscoind')
-        child = exec("./daemon_scripts/bin/syscoind -regtest -daemon", function (error, stdout, stderr) {
-          util.print('stdout: ' + stdout)
-          util.print('stderr: ' + stderr)
+        child = exec('./daemon_scripts/bin/syscoind -regtest -daemon', function (error, stdout, stderr) {
+          console.log('stdout: ' + stdout)
+          console.log('stderr: ' + stderr)
           if (error !== null) {
             console.log('exec error: ' + error)
           }

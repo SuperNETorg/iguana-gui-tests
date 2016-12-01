@@ -13,7 +13,7 @@ function getScreenshotUrl() {
 }
 
 module.exports = {
-  'test IguanaGUI execute add a wallet': function(browser) {
+  'test IguanaGUI execute add a wallet 2nd time': function(browser) {
     browser
       .pause(3000)
       .moveToElement('.login-add-coin-selection-title', 2, 2, function() {
