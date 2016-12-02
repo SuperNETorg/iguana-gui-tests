@@ -949,13 +949,14 @@ angular.module('IguanaGUIApp')
       if (conf) {
         return $storage['isIguana'] ?
         { 'Content-Type': 'application/x-www-form-urlencoded' } :
-        { 'Authorization': 'Basic ' + btoa(conf.user + ':' + conf.pass) };
+        { 'Authorization': 'Basic ' + btoa(conf.user + ':' + conf.pass), 'IguanaURL': 'test' };
       } else if ($storage['activeCoin'] || coin) {
         return $storage['isIguana'] ?
           { 'Content-Type': 'application/x-www-form-urlencoded' } :
           {
             'Authorization': 'Basic ' + btoa(this.getConf().coins[coin ? coin : $storage['activeCoin']].user + ':' +
-                              this.getConf().coins[coin ? coin : $storage['activeCoin']].pass)
+                              this.getConf().coins[coin ? coin : $storage['activeCoin']].pass),
+            'IguanaURL': 'test'
           };
       }
 

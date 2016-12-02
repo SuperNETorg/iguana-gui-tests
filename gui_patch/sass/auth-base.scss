@@ -13,119 +13,17 @@ $login-button-disabled-color: #B2B4B7;
 .body-wrapper.auth-main {
   display: table;
   height: 100%;
+  margin: 0 auto;
   width: 100%;
 
-  .form-container {
-    display: table;
-    height: 90%;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-
-    .form-header {
-      display: table-caption;
-      height: 60px;
-
-      .title {
-        color: $color-white;
-        font-size: 1.44em;
-        position: relative;
-        text-align: center;
-        top: 18px;
-        z-index: 10;
-      }
-    }
-    .form-content {
-      display: table-cell;
-      margin: 0;
-      vertical-align: middle;
-
-      .page-form-header {
-        margin: 1em;
-
-        .page-title {
-          color: $color-white;
-          font-size: 4.1em;
-          font-weight: bold;
-          position: relative;
-          text-align: center;
-          top: 18px;
-          z-index: 10;
-          @include no-text-shadow
-        }
-      }
-      .form-content-inner {
-        margin: 0 auto;
-        max-width: 622px;
-      }
-      .login-passphrase-textarea.offset-bottom-sm.row.center,
-      .login-passphrase-textarea {
-        border-radius: 4px;
-        display: block;
-        font-size: 1.28em;
-        font-weight: 600;
-        height: 110px;
-        margin: 28px auto;
-        padding: 15px 50px;
-      }
-    }
+  .form-header .title {
+    color: $color-white;
+    font-size: 1.23em;
+    position: relative;
+    text-align: center;
+    top: 18px;
+    z-index: 10;
   }
-  .passphrase-section {
-    display: table;
-    height: 90%;
-    position: absolute;
-    width: 100%
-  }
-  .inner-passphrase-section {
-    display: table-cell;
-    margin: 0 auto;
-    vertical-align: middle;
-    width: 50%;
-  }
-  .login-passphrase-textarea {
-    display: block;
-    font-size: 1.24em;
-    font-weight: 600;
-    height: 85px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 15px 50px;
-    resize:none;
-    width: 100%;
-  }
-  .btn-signin-account {
-    margin-top: 50px;
-    max-width:none;
-    width: 100%;
-  }
-  .txt-massage {
-    color: red;
-    margin-bottom:25px
-  }
-  .error-msg {
-    border:1px solid red;
-  }
-  .login-input-directions {
-    margin-bottom:25px;
-  }
-  .advanced-benefits {
-    font-size: 1.06em;
-    font-weight: bold;
-  }
-  .navbar {
-    .navbar-header{
-      .navbar-brand{
-        font-size: 22px;
-        @include bold;
-      }
-    }
-  }
-}
-.auth-orange-gradient {
-  @include login-orange-gradient;
 }
 .auth-main {
   .coin {
@@ -152,15 +50,18 @@ $login-button-disabled-color: #B2B4B7;
   .box-shadow-bottom {
     box-shadow: 0 1px 1px 0 rgba-black(0.2);
   }
+  .form-container {
+    background-color: transparent;
+    margin: 0 auto;
+  }
   .login-or-delim {
-    color:#FEFBF9;
     font-family: sans-serif;
     letter-spacing: 1px;
     padding: 20px 0;
-
   }
   .login-add-coin-selection {
     text-align: center;
+    //margin-top: 6em;
 
     textarea {
       @include proxima;
@@ -179,7 +80,7 @@ $login-button-disabled-color: #B2B4B7;
     @include bold;
     background: $color-white;
     border-radius: $border-radius-smaller;
-    box-shadow: 0 2px 3px 2px rgba-black(0.12);
+    box-shadow: 0 2px 3px 1px rgba-black(0.1);
     font-size: 1.16em;
     padding: 36px 12px 15px;
     width: 100%;
@@ -218,18 +119,17 @@ $login-button-disabled-color: #B2B4B7;
   }
   .offset-bottom-sm {
     margin: 15px auto;
+    width: 264px;
   }
   .offset-bottom-md {
-    margin: 32px auto 27px auto;
-  }
-  .advanced-benefits {
-    color:#FEFBF9;
+    margin: 30px auto 30px auto;
   }
   .create-account-form .login-input-directions,
   .verify-passphrase-form .login-input-directions {
     margin-bottom: 0;
     width: 80%;
     word-wrap: break-word;
+    //margin-top: 10em;
   }
   .header {
     background-color: $login-header-color-bg;
@@ -269,6 +169,9 @@ $login-button-disabled-color: #B2B4B7;
     height: 40px;
     margin: 0 auto;
   }
+  .text-shadow {
+    text-shadow: 0 1px 3px rgba-black(0.25);
+  }
   .btn:hover,
   .btn:focus {
     box-shadow: 0 0 2px 1px rgba-black(0.2);
@@ -278,25 +181,13 @@ $login-button-disabled-color: #B2B4B7;
     box-shadow: none;
     text-shadow: none;
   }
-  .btn:disabled {
-    background: $background-for-page;
-    @include no-box-shadow;
-    @include no-text-shadow;
-  }
-  .btn.row {
-    font-size: 1.05em;
-    height: 34px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 300px;
-  }
   .checkbox {
     display: inline-block;
   }
   .label-text {
     cursor: hand;
     cursor: pointer;
-    font-size: 1.09em;
+    font-size: 1.05em;
   }
   input[type='checkbox'] {
     display: none;
@@ -304,7 +195,6 @@ $login-button-disabled-color: #B2B4B7;
   input[type='checkbox'] + label {
     display: block;
     font-weight: normal;
-    margin-bottom: 8px;
     text-align: center;
 
     .box {
@@ -313,7 +203,7 @@ $login-button-disabled-color: #B2B4B7;
       border-radius: $border-radius-smaller;
       display: inline-block;
       height: 20px;
-      margin: 0 16px 2px 1px;
+      margin: -4px 17px 0 0;
       vertical-align: middle;
       width: 20px;
     }

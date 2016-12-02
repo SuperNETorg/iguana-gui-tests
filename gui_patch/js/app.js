@@ -15,7 +15,7 @@ angular.module('IguanaGUIApp.controllers', [
   'ngStorage',
   'ui.bootstrap'
 ])
-.value('vars', {});
+.value('vars', {})
 angular.module('IguanaGUIApp', [
   'ui.router',
   'ngSanitize',
@@ -38,12 +38,6 @@ angular.module('IguanaGUIApp', [
       url: '/login',
       templateUrl: 'partials/login.html',
       controller: 'loginController',
-      data: {
-        pageTitle: 'PAGE.LOGIN'
-      }
-    })
-    .state('login.step2', {
-      // url: '/step2',
       data: {
         pageTitle: 'PAGE.LOGIN'
       }

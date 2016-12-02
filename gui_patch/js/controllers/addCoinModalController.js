@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('IguanaGUIApp')
-.controller('loginSelectCoinModalController', [
+.controller('addCoinModalController', [
   '$scope',
   '$state',
   '$uibModalInstance',
@@ -25,7 +25,6 @@ angular.module('IguanaGUIApp')
       'light-blue',
       'yellow'
     ];
-    $storage['iguana-login-active-coin'] = {};
 
     $scope.open = open;
     $scope.close = close;
@@ -108,7 +107,12 @@ angular.module('IguanaGUIApp')
     function clickOnCoin(item, $event) {
       var coinElement = angular.element($event.currentTarget);
 
-      if (!coinElement.hasClass('active')) {
+      if (
+        (
+          !$storage['isIguana'] ||
+          ($storage['isIguana'] && $state.$current.url == '/signup')
+        ) &&
+        !coinElement.hasClass('active')) {
         $scope.selectedCoins = [];
         $storage['iguana-login-active-coin'] = {};
       }
@@ -127,8 +131,6 @@ angular.module('IguanaGUIApp')
       }
 
       $scope.selectedCoins = $storage['iguana-login-active-coin'];
-      $state.go('login.step2');
-      $uibModalInstance.close(constructCoinRepeater());
     }
 
     function close() {
@@ -136,6 +138,7 @@ angular.module('IguanaGUIApp')
     }
 
     function next() {
+      if ($state.current.name === 'dashboard.main') $rootScope.$broadcast('modal.dismissed');
       $uibModalInstance.close(constructCoinRepeater());
     }
 

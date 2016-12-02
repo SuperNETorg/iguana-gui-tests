@@ -3,7 +3,7 @@
  * info: debug purposes
  */
 
-  dev = new Array();
+  var dev = new Array();
   dev.isDev = true; // set to true if you want to disable passphrase verification in iguana env
   dev.showSyncDebug = false;
   dev.showConsoleMessages = true;
@@ -18,7 +18,8 @@
       'doge': 'guide blossom jaguar final cushion lottery copy average guitar empower slam code before hockey park tilt differ flee century trick finish decide remember bone',
       'ltc': 'area march pause step law shrug curve dinosaur gown deny inspire matter chest maximum often usual lion purse wave squirrel easy favorite mutual width',
       'nmc': 'table fall scissors hammer champion inmate exhibit below fault post lock spatial early frown reveal balcony toward dirt ginger enable mobile scrub budget embrace',
-      'kmd': 'radar hint palm taste guess sweet exhaust start concert aspect burger first'
+      'kmd': 'radar hint palm taste guess sweet exhaust start concert aspect burger first',
+      'mzc': '1234'
     },
     'iguana': 'lime lime'
   };
@@ -34,11 +35,11 @@
   // for simultaneous dev in iguana and non-iguana modes
   dev.sessions = {
     'Chrome': false, // true - iguana, false - coind
-    'Firefox': false
+    'Firefox': true
   };
 
 // dev
-var sendDataTest = { 'btcd' : { address: 'R9XTAMpr2Sm4xxUQA1g1brxPZGaTvj9xqp', val: '0.00001', note: 'gui test send to kashi\'s addr' },
+var sendDataTest = { 'btcd': { address: 'R9XTAMpr2Sm4xxUQA1g1brxPZGaTvj9xqp', val: '0.00001', note: 'gui test send to kashi\'s addr' },
                      'sys': { address: '127a42hPqaUy6zBbgfo5HHh7G9WGBQYQR4', val: '0.00001', note: 'gui test send to ed888 addr' } };
 
 function loadTestSendData(coin) {

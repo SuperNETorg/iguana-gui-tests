@@ -86,7 +86,7 @@ $txunit-item-progress-icon-before-color: #2092FE;
   .item {
     @include bold;
     @include cursor-pointer;
-    background: #F6FAFF;
+    background: rgb(246, 250, 255);
     border-radius: $border-radius-smaller;
     font-size: 1.2em;
     margin-bottom: 25px;

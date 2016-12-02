@@ -39,6 +39,7 @@ exports.indexHTML = function(buildMode, buildModeModifier) {
                        '<style>\n' +
                          '<!-- partial:' + paths.build[buildMode] + '/css/style.scss --><!-- partial -->\n' +
                        '</style>' +
+                       '<link rel="stylesheet" href="css/responsive/auth.css">' +
                        '<link rel="stylesheet" href="css/responsive/dashboard.css">' : prodInsertCSS))
          .pipe(injectPartials({
            removeTags: true

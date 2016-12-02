@@ -82,6 +82,14 @@ angular.module('IguanaGUIApp')
       };
     }
 
+    $scope.isDisabled = function() {
+      if (!$storage['iguana-login-active-coin']) {
+        $storage['iguana-login-active-coin'] = {};
+      }
+
+      return Object.keys($storage['iguana-login-active-coin']).length === 0;
+    };
+
     $scope.close = function() {
       $uibModalInstance.dismiss();
     };

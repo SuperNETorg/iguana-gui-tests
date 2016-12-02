@@ -5,9 +5,6 @@
 
 @import 'dev.scss';
 
-.iguana-modal.message-container::before {
-  display: initial;
-}
 .iguana-modal.message-container {
   @include proxima;
   background: rgba(255, 255, 255, 0.7);
@@ -29,7 +26,7 @@
   .modal-content {
     border: none;
     border-radius: $border-radius-smaller;
-    box-shadow: 0 0 20px 0 #DEA5AB;
+    box-shadow: 0 0 20px 0 rgb(222, 165, 171);
     margin: 0 auto;
     max-width: 390px;
     min-width: 300px;

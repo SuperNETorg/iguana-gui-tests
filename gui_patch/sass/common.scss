@@ -7,13 +7,13 @@
 
 body,
 html {
-  background-color: #f5fafd;
   @include proxima;
   height: 100%;
   left: 0;
   margin: 0;
   overflow: auto !important; /* prevent scrolling when modal is visible */
   padding: 0 !important;
+  position: absolute;
   top: 0;
   width: 100%; /* override default bootstrap modal css */
 }
@@ -30,15 +30,13 @@ html {
 .col-red {
   color: $color-red;
 }
-.col-white {
-  color: $color-white;
-}
 .modal .modal-dialog.modal-lg {
   width: 800px;
 }
 .app-container,
 .app-container-inner {
-
+  @include login-orange-gradient;
+  height: 100%;
 }
 .dashboard-page .app-container,
 .dashboard-page .app-container-inner {
