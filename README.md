@@ -11,3 +11,11 @@ other deps:
 - Iguana Core
 - Syscoin
 - Mazacoin
+
+Test coverage so far:
+- encrypt already encrypted sys wallet
+- encrypt unencrypted sys wallet and signin into dashboard
+- signin with test sys wallet and change currency
+- signin with test sys wallet and check empty dashboard
+- signin with test sys wallet and check non-empty dashboard
+- signin with test sys wallet and add test mzc wallet from within the dashboard
