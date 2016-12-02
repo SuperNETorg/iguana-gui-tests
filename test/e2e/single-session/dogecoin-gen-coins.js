@@ -34,7 +34,7 @@ module.exports = {
       })
       .pause(1000, function() {
         console.log('get account address')
-        child = exec('./daemon_scripts/bin/doge-cli -regtest getaccountaddress ""', function(error, stdout, stderr) {
+        child = exec('./daemon_scripts/bin/dogecoin-cli -regtest getaccountaddress ""', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {

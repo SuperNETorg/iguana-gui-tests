@@ -8,8 +8,8 @@ sleep 4
 rm "$syscoin" -rf
 echo "$syscoin removed"
 
-rm "$mazacoin" -rf
-echo "$mazacoin removed"
+rm "$dogecoin" -rf
+echo "$dogecoin removed"
 
 ./bin/syscoind -regtest -daemon
 ./bin/dogecoind -regtest -daemon
