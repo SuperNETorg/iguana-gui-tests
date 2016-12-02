@@ -8,11 +8,6 @@ var conf = require('../../../nightwatch.conf.js'),
     exec = require('child_process').exec,
     child;
 
-function getScreenshotUrl() {
-  step++;
-  return 'screenshots/signup-after-wallet-encrypt-' + step +'.png';
-}
-
 module.exports = {
   'test IguanaGUI execute syscoin regtest generate': function(browser) {
     browser
@@ -34,7 +29,7 @@ module.exports = {
           if (error !== null) {
             console.log('exec error: ' + error)
           }
-          fs.writeFileSync('listtransactions.txt', stdout, 'utf-8')
+          fs.writeFileSync('listtransactions-sys.txt', stdout, 'utf-8')
         })
       })
       .pause(1000, function() {
@@ -45,7 +40,7 @@ module.exports = {
           if (error !== null) {
             console.log('exec error: ' + error)
           }
-          fs.writeFileSync('accountaddress.txt', stdout, 'utf-8')
+          fs.writeFileSync('accountaddress-sys.txt', stdout, 'utf-8')
         })
       })
       .pause(1000)

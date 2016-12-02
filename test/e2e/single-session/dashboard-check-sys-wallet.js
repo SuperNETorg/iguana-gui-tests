@@ -14,5 +14,5 @@ var extend = function(target) {
 module.exports = extend(module.exports, require("./login-page-check"));
 module.exports = extend(module.exports, require("./add-wallet"));
 module.exports = extend(module.exports, require("./signin-dashboard"));
-//module.exports = extend(module.exports, require("./syscoin-gen-coins"));
+module.exports = extend(module.exports, require("./syscoin-gen-coins"));
 module.exports = extend(module.exports, require("./dashboard-check-nonempty-sys-wallet"));

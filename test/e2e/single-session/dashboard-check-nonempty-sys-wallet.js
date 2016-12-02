@@ -9,19 +9,18 @@ var conf = require('../../../nightwatch.conf.js'),
     child,
     currency = 'usd',
     coin = 'sys',
-    genSysVal = 474200578,
-    transactionAmount = 54.13,
+    genSysVal = 474200578, // TODO: read from getbalance rpc output
     coinFullName = 'Syscoin',
     txData,
     defaultAddress;
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/dashboard-check-nonempty-sys-wallet' + step +'.png';
+  return 'screenshots/dashboard-check-nonempty-sys-wallet-' + step +'.png';
 }
 
 function getTx() {
-  return JSON.parse(fs.readFileSync('listtransactions.txt', 'utf-8'))[0];
+  return JSON.parse(fs.readFileSync('listtransactions-sys.txt', 'utf-8'))[0];
 }
 
 module.exports = {
@@ -47,5 +46,6 @@ module.exports = {
       .verify.containsText('.transactions-list-repeater .item:first-child .amount .value', getTx().amount)
       .verify.containsText('.transactions-list-repeater .item:first-child .amount .coin-name', coin.toUpperCase())
       .verify.containsText('.transactions-list-repeater .item:first-child .hash', getTx().address)
+      .saveScreenshot(getScreenshotUrl())
   }
 };
