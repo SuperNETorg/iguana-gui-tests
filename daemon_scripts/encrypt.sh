@@ -1,8 +1,8 @@
 syscoin=/home/pbca/.syscoin/regtest
-mazacoin=/home/pbca/.maza/regtest
+dogecoin=/home/pbca/.dogecoin/regtest
 
 ./bin/syscoin-cli stop
-./bin/maza-cli stop
+./bin/dogecoin-cli stop
 sleep 4
 
 rm "$syscoin" -rf

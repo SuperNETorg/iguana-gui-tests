@@ -9,11 +9,11 @@ var conf = require('../../../nightwatch.conf.js'),
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/login-add-wallet-mzc-dashboard-' + step +'.png';
+  return 'screenshots/login-add-wallet-doge-dashboard-' + step +'.png';
 }
 
 module.exports = {
-  'test IguanaGUI execute add mzc wallet on dashboard page': function(browser) {
+  'test IguanaGUI execute add doge wallet on dashboard page': function(browser) {
     browser
       .pause(500)
       .verify.cssClassNotPresent('.coins .btn-add-coin', 'disabled')
@@ -33,15 +33,15 @@ module.exports = {
           .saveScreenshot(getScreenshotUrl())
           .clearValue('.quick-search input[type=text]')
         browser
-          .verify.visible('.supported-coins-repeater-inner .coin.mzc')
+          .verify.visible('.supported-coins-repeater-inner .coin.doge')
           .verify.cssClassPresent('.btn-next', 'disabled')
         browser
-          .setValue('.quick-search input[type=text]', ['mazacoin'])
+          .setValue('.quick-search input[type=text]', ['dogecoin'])
           .pause(500)
-          .verify.visible('.supported-coins-repeater-inner .coin.mzc')
-          .click('.supported-coins-repeater-inner .coin.mzc')
+          .verify.visible('.supported-coins-repeater-inner .coin.doge')
+          .click('.supported-coins-repeater-inner .coin.doge')
           .verify.cssClassNotPresent('.btn-next', 'disabled')
-          .verify.cssClassPresent('.supported-coins-repeater-inner .coin.mzc', 'active')
+          .verify.cssClassPresent('.supported-coins-repeater-inner .coin.doge', 'active')
           .saveScreenshot(getScreenshotUrl())
           .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)

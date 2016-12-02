@@ -12,8 +12,8 @@ module.exports = {
   'test IguanaGUI execute mazacoin regtest generate': function(browser) {
     browser
       .pause(100, function() {
-        console.log('gen mzc coins')
-        child = exec('./daemon_scripts/bin/maza-cli -regtest generate 101', function(error, stdout, stderr) {
+        console.log('gen doge coins')
+        child = exec('./daemon_scripts/bin/dogecoin-cli -regtest generate 101', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {
@@ -23,24 +23,24 @@ module.exports = {
       })
       .pause(1000, function() {
         console.log('get last transaction')
-        child = exec('./daemon_scripts/bin/maza-cli -regtest listtransactions "" 1', function(error, stdout, stderr) {
+        child = exec('./daemon_scripts/bin/dogecoin-cli -regtest listtransactions "" 1', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {
             console.log('exec error: ' + error)
           }
-          fs.writeFileSync('listtransactions-mzc.txt', stdout, 'utf-8')
+          fs.writeFileSync('listtransactions-doge.txt', stdout, 'utf-8')
         })
       })
       .pause(1000, function() {
         console.log('get account address')
-        child = exec('./daemon_scripts/bin/maza-cli -regtest getaccountaddress ""', function(error, stdout, stderr) {
+        child = exec('./daemon_scripts/bin/doge-cli -regtest getaccountaddress ""', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {
             console.log('exec error: ' + error)
           }
-          fs.writeFileSync('accountaddress-mzc.txt', stdout, 'utf-8')
+          fs.writeFileSync('accountaddress-doge.txt', stdout, 'utf-8')
         })
       })
       .pause(1000)

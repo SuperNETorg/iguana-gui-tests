@@ -1,8 +1,8 @@
 syscoin=/home/pbca/.syscoin/regtest
-mazacoin=/home/pbca/.maza/regtest
+dogecoin=/home/pbca/.dogecoin/regtest
 
 ./bin/syscoin-cli stop
-./bin/maza-cli stop
+./bin/dogecoin-cli stop
 sleep 4
 
 rm "$syscoin" -rf
@@ -12,13 +12,13 @@ rm "$mazacoin" -rf
 echo "$mazacoin removed"
 
 ./bin/syscoind -regtest -daemon
-./bin/mazad -regtest -daemon
+./bin/dogecoind -regtest -daemon
 sleep 1
 ./bin/syscoin-cli -regtest encryptwallet "test test"
-./bin/maza-cli -regtest encryptwallet "test test"
+./bin/dogecoin-cli -regtest encryptwallet "test test"
 sleep 5
 ./bin/syscoind -regtest -daemon
-./bin/mazad -regtest -daemon
+./bin/dogecoind -regtest -daemon
 sleep 1
 
 #cd ../

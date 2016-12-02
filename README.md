@@ -10,7 +10,7 @@ other deps:
 - built Iguana GUI
 - Iguana Core
 - Syscoin
-- Mazacoin
+- Dogecoin
 
 Test coverage so far:
 - encrypt already encrypted sys wallet
