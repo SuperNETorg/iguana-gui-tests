@@ -1,11 +1,6 @@
 var conf = require('../../../nightwatch.conf.js'),
-    iguanaGUIFolder = 'file:///home/pbca/Iguana-GUI/compiled/dev/',
     step = -1,
-    generatedPassphraseText,
-    chalk = require('chalk'),
-    util = require('util'),
-    exec = require('child_process').exec,
-    child;
+    exec = require('child_process').exec;
 
 function getScreenshotUrl() {
   step++;
@@ -23,7 +18,7 @@ module.exports = {
       .keys(browser.Keys.ESCAPE)
       .pause(5000, function() {
         console.log('restart syscoind')
-        child = exec('./daemon_scripts/bin/syscoind -regtest -daemon', function(error, stdout, stderr) {
+        exec('./daemon_scripts/bin/syscoind -regtest -daemon', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {

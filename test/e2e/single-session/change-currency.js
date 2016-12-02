@@ -1,12 +1,5 @@
 var conf = require('../../../nightwatch.conf.js'),
-    iguanaGUIFolder = 'file:///home/pbca/Iguana-GUI/compiled/dev/',
-    step = -1,
-    chalk = require('chalk'),
-    util = require('util'),
-    fs = require('fs'),
-    generatedPassphraseText,
-    exec = require('child_process').exec,
-    child;
+    step = -1;
 
 function getScreenshotUrl() {
   step++;
@@ -16,7 +9,7 @@ function getScreenshotUrl() {
 module.exports = {
   'test IguanaGUI change currency': function(browser) {
     browser
-      .url(iguanaGUIFolder + 'index.html#/settings')
+      .url(conf.iguanaGuiURL + 'index.html#/settings')
       .waitForElementVisible('.currency-content', 5000)
       .verify.title('Iguana / settings')
       .saveScreenshot(getScreenshotUrl())
@@ -24,7 +17,7 @@ module.exports = {
       .verify.cssClassPresent('.currency-loop .country-li:nth-child(2)', 'active')
       .verify.containsText('.currency-loop .country-li:nth-child(2)', 'Euro')
       .saveScreenshot(getScreenshotUrl())
-      .url(iguanaGUIFolder + 'index.html#/dashboard')
+      .url(conf.iguanaGuiURL + 'index.html#/dashboard')
       .waitForElementVisible('.dashboard')
       .verify.title('Iguana / Dashboard')
   }

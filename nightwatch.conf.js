@@ -9,138 +9,152 @@ require('env2')('.env'); // optionally store youre Evironment Variables in .env
 
 const PKG = require('./package.json'); // so we can get the version of the project
 const BINPATH = './node_modules/nightwatch/bin/'; // change if required.
-const SCREENSHOT_PATH = "./node_modules/nightwatch/screenshots/" + PKG.version + "/"
+const SCREENSHOT_PATH = './node_modules/nightwatch/screenshots/' + PKG.version + '/'
+
+var extend = function(target) {
+  var sources = [].slice.call(arguments, 1);
+
+  sources.forEach(function(source) {
+    for (var prop in source) {
+      target[prop] = source[prop];
+    }
+  });
+
+  return target;
+};
 
 const config = { // we use a nightwatch.conf.js file so we can include comments and helper functions
-  "custom_commands_path" : "node_modules/nightwatch-custom-commands-assertions/js/commands",
-  "custom_assertions_path" : "node_modules/nightwatch-custom-commands-assertions/js/assertions",
-  "src_folders": [
-    "test/e2e"     // we use /test as the name of our test directory by default. so test/e2e for e2e
+  'custom_commands_path' : 'node_modules/nightwatch-custom-commands-assertions/js/commands',
+  'custom_assertions_path' : 'node_modules/nightwatch-custom-commands-assertions/js/assertions',
+  'iguanaGuiURL': 'file:///home/pbca/Iguana-GUI/compiled/dev/',
+  'src_folders': [
+    'test/e2e'     // we use /test as the name of our test directory by default. so test/e2e for e2e
   ],
-  "output_folder": "./node_modules/nightwatch/reports", // reports (test outcome) output by nightwatch
-  "selenium": {
-    "start_process": true,
-    "server_path": BINPATH + "selenium.jar", // downloaded by selenium-download module (see below)
-    "log_path": "",
-    "host": "127.0.0.1",
-    "port": 4444,
-    "cli_args": {
-      "webdriver.chrome.driver" : BINPATH + "chromedriver"/*,
-      "webdriver.gecko.profile" : BINPATH + "geckodriver"*/
+  'output_folder': './node_modules/nightwatch/reports', // reports (test outcome) output by nightwatch
+  'selenium': {
+    'start_process': true,
+    'server_path': BINPATH + 'selenium.jar', // downloaded by selenium-download module (see below)
+    'log_path': '',
+    'host': '127.0.0.1',
+    'port': 4444,
+    'cli_args': {
+      'webdriver.chrome.driver' : BINPATH + 'chromedriver'/*,
+      'webdriver.gecko.profile' : BINPATH + 'geckodriver'*/
     }
   },
-  "test_workers" : {
-    "enabled" : true,
-    "workers" : "auto"
+  'test_workers' : {
+    'enabled' : true,
+    'workers' : 'auto'
   }, // perform tests in parallel where possible
-  "test_settings": {
-    "default": {
-      "launch_url": "http://localhost", // we're testing a Public or "staging" site on Saucelabs
-      "selenium_port": 80,
-      "selenium_host": "ondemand.saucelabs.com",
-      "silent": true,
-      "screenshots": {
-        "enabled": true, // save screenshots to this directory (excluded by .gitignore)
-        "path": SCREENSHOT_PATH
+  'test_settings': {
+    'default': {
+      'launch_url': 'http://localhost', // we're testing a Public or 'staging' site on Saucelabs
+      'selenium_port': 80,
+      'selenium_host': 'ondemand.saucelabs.com',
+      'silent': true,
+      'screenshots': {
+        'enabled': true, // save screenshots to this directory (excluded by .gitignore)
+        'path': SCREENSHOT_PATH
       },
-      "username" : "pbca26",     // if you want to use Saucelabs remember to
-      "access_key" : "d06c3ad3-baed-4965-bb1a-7be4a0a31137", // export your environment variables (see readme)
-      "globals": {
-        "waitForConditionTimeout": 10000    // wait for content on the page bsauefore continuing
+      'username' : 'pbca26',     // if you want to use Saucelabs remember to
+      'access_key' : 'd06c3ad3-baed-4965-bb1a-7be4a0a31137', // export your environment variables (see readme)
+      'globals': {
+        'waitForConditionTimeout': 10000    // wait for content on the page bsauefore continuing
       }
     },
-    "local": {
-      "launch_url": "http://localhost",
-      "selenium_port": 4444,
-      "selenium_host": "127.0.0.1",
-      "silent": true,
-      "screenshots": {
-        "enabled": true, // save screenshots taken here
-        "path": SCREENSHOT_PATH
+    'local': {
+      'launch_url': 'http://localhost',
+      'selenium_port': 4444,
+      'selenium_host': '127.0.0.1',
+      'silent': true,
+      'screenshots': {
+        'enabled': true, // save screenshots taken here
+        'path': SCREENSHOT_PATH
       }, // this allows us to control the
-      "globals": {
-        "waitForConditionTimeout": 15000 // on localhost sometimes internet is slow so wait...
+      'globals': {
+        'waitForConditionTimeout': 15000 // on localhost sometimes internet is slow so wait...
       },
-      "desiredCapabilities": {
-        "browserName": "chrome",
-        "chromeOptions": {
-          "args": [
+      'desiredCapabilities': {
+        'browserName': 'chrome',
+        'chromeOptions': {
+          'args': [
             `Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46
             (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3`,
-            //"--window-size=1900,1000"
-            "--window-size=1024,768"
+            //'--window-size=1900,1000'
+            '--window-size=1024,768'
           ]
         },
-        "javascriptEnabled": true,
-        "acceptSslCerts": true
+        'javascriptEnabled': true,
+        'acceptSslCerts': true
       }
-      /*"desiredCapabilities": { // not working, see selenium-debug.log for details
-        "browserName": "firefox",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true
+      /*'desiredCapabilities': { // not working, see selenium-debug.log for details
+        'browserName': 'firefox',
+        'javascriptEnabled': true,
+        'acceptSslCerts': true
       }*/
     },
-    "chrome": { // local chrome
-      "desiredCapabilities": {
-        "browserName": "chrome",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true
+    'chrome': { // local chrome
+      'desiredCapabilities': {
+        'browserName': 'chrome',
+        'javascriptEnabled': true,
+        'acceptSslCerts': true
       }
     },
-    /*"firefox": { // local firefox
-      "desiredCapabilities": {
-        "browserName": "firefox",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true
+    /*'firefox': { // local firefox
+      'desiredCapabilities': {
+        'browserName': 'firefox',
+        'javascriptEnabled': true,
+        'acceptSslCerts': true
       }
     },*/
     /* saucelabs list of browsers
-    "chromemac": {
-      "desiredCapabilities": {
-        "browserName": "chrome",
-        "platform": "OS X 10.11",
-        "version": "47"
+    'chromemac': {
+      'desiredCapabilities': {
+        'browserName': 'chrome',
+        'platform': 'OS X 10.11',
+        'version': '47'
       }
     },
-    "ie11": {
-      "desiredCapabilities": {
-        "browserName": "internet explorer",
-        "platform": "Windows 10",
-        "version": "11.0"
+    'ie11': {
+      'desiredCapabilities': {
+        'browserName': 'internet explorer',
+        'platform': 'Windows 10',
+        'version': '11.0'
       }
     },
-    "firefox" : {
-      "desiredCapabilities": {
-        "platform": "XP",
-        "browserName": "firefox",
-        "version": "33"
+    'firefox' : {
+      'desiredCapabilities': {
+        'platform': 'XP',
+        'browserName': 'firefox',
+        'version': '33'
       }
     },
-    "internet_explorer_10" : {
-      "desiredCapabilities": {
-        "platform": "Windows 7",
-        "browserName": "internet explorer",
-        "version": "10"
+    'internet_explorer_10' : {
+      'desiredCapabilities': {
+        'platform': 'Windows 7',
+        'browserName': 'internet explorer',
+        'version': '10'
       }
     },
-    "android_s4_emulator": {
-      "desiredCapabilities": {
-        "browserName": "android",
-        "deviceOrientation": "portrait",
-        "deviceName": "Samsung Galaxy S4 Emulator",
-        "version": "4.4"
+    'android_s4_emulator': {
+      'desiredCapabilities': {
+        'browserName': 'android',
+        'deviceOrientation': 'portrait',
+        'deviceName': 'Samsung Galaxy S4 Emulator',
+        'version': '4.4'
       }
     },
-    "iphone_6_simulator": {
-      "desiredCapabilities": {
-        "browserName": "iPhone",
-        "deviceOrientation": "portrait",
-        "deviceName": "iPhone 6",
-        "platform": "OSX 10.10",
-        "version": "8.4"
+    'iphone_6_simulator': {
+      'desiredCapabilities': {
+        'browserName': 'iPhone',
+        'deviceOrientation': 'portrait',
+        'deviceName': 'iPhone 6',
+        'platform': 'OSX 10.10',
+        'version': '8.4'
       }
     }*/
-  }
+  },
+  extend: extend
 }
 
 module.exports = config;
@@ -155,16 +169,16 @@ require('fs').stat(BINPATH + 'selenium.jar', function (err, stat) { // got it?
     require('selenium-download').ensure(BINPATH, function(error) {
       if (error) throw new Error(error); // no point continuing so exit!
 
-      console.log('✔ Selenium & Chromedriver downloaded to:', BINPATH);
+      console.log('✔ Selenium & Chromedriver downloaded to: ', BINPATH);
     });
   }
 });
 
-function padLeft (count) { // theregister.co.uk/2016/03/23/npm_left_pad_chaos/
+function padLeft(count) { // theregister.co.uk/2016/03/23/npm_left_pad_chaos/
   return count < 10 ? '0' + count : count.toString();
 }
 
-var FILECOUNT = 0; // "global" screenshot file count
+var FILECOUNT = 0; // 'global' screenshot file count
 /**
  * The default is to save screenshots to the root of your project even though
  * there is a screenshots path in the config object above! ... so we need a
@@ -173,8 +187,8 @@ var FILECOUNT = 0; // "global" screenshot file count
  * the Platform/Browser where the test was run and the test (file) name.
  */
 function imgpath(browser) {
-  var a = browser.options.desiredCapabilities;
-  var meta = [a.platform];
+  var a = browser.options.desiredCapabilities,
+      meta = [a.platform];
 
   meta.push(a.browserName ? a.browserName : 'any');
   meta.push(a.version ? a.version : 'any');

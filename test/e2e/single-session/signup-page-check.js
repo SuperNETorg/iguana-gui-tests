@@ -1,12 +1,7 @@
 var conf = require('../../../nightwatch.conf.js'),
-    iguanaGUIFolder = 'file:///home/pbca/Iguana-GUI/compiled/dev/',
     step = -1,
     generatedPassphraseText,
-    chalk = require('chalk'),
-    util = require('util'),
-    fs = require('fs'),
-    exec = require('child_process').exec,
-    child;
+    fs = require('fs');
 
 function getScreenshotUrl() {
   step++;

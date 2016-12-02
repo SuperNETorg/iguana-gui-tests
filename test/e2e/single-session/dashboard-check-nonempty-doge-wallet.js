@@ -1,12 +1,6 @@
 var conf = require('../../../nightwatch.conf.js'),
-    iguanaGUIFolder = 'file:///home/pbca/Iguana-GUI/compiled/dev/',
     step = -1,
-    chalk = require('chalk'),
-    util = require('util'),
     fs = require('fs'),
-    generatedPassphraseText,
-    exec = require('child_process').exec,
-    child,
     currency = 'usd',
     coin = 'doge',
     genSysVal = 20500000, // TODO: read from getbalance rpc output
@@ -49,7 +43,7 @@ module.exports = {
       .verify.containsText('.transactions-list-repeater .item:first-child .amount .coin-name', coin.toUpperCase())
       .verify.containsText('.transactions-list-repeater .item:first-child .hash', getTx().address)
       .pause('1000')
-      .url(iguanaGUIFolder + 'index.html#/login')
+      .url(conf.iguanaGuiURL + 'index.html#/login')
       .pause('3000')
       .verify.cssClassPresent('.coins .btn-add-coin', 'disabled')
       .saveScreenshot(getScreenshotUrl())

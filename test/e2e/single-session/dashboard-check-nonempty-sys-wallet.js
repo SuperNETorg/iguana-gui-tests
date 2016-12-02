@@ -1,12 +1,6 @@
 var conf = require('../../../nightwatch.conf.js'),
-    iguanaGUIFolder = 'file:///home/pbca/Iguana-GUI/compiled/dev/',
     step = -1,
-    chalk = require('chalk'),
-    util = require('util'),
     fs = require('fs'),
-    generatedPassphraseText,
-    exec = require('child_process').exec,
-    child,
     currency = 'usd',
     coin = 'sys',
     genSysVal = 474200578, // TODO: read from getbalance rpc output
