@@ -3,7 +3,7 @@ var conf = require('../../../nightwatch.conf.js'),
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/signup-after-wallet-encrypt-' + step +'.png';
+  return 'screenshots/signup-after-wallet-encrypt-' + step + '.png';
 }
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     browser
       .pause(2000)
       .clearValue('#passphrase')
-      .setValue('#passphrase', fs.readFileSync('savedpassphrase.txt', 'utf-8'))
+      .setValue('#passphrase', fs.readFileSync('temp/savedpassphrase.txt', 'utf-8'))
       .pause(250)
       .saveScreenshot(getScreenshotUrl())
       .getAttribute('.btn-signin', 'disabled', function(result) {

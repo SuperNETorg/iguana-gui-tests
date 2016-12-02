@@ -3,7 +3,7 @@ var conf = require('../../../nightwatch.conf.js'),
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/signup-passphrase-error' + step +'.png';
+  return 'screenshots/signup-passphrase-error' + step + '.png';
 }
 
 module.exports = {

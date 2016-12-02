@@ -3,7 +3,7 @@ var conf = require('../../../nightwatch.conf.js'),
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/signin-to-dashboard-' + step +'.png';
+  return 'screenshots/signin-to-dashboard-' + step + '.png';
 }
 
 module.exports = {

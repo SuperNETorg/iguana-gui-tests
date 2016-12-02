@@ -7,7 +7,7 @@ module.exports = {
     browser
       .pause(100, function() {
         console.log('gen sys coins')
-        exec('./daemon_scripts/bin/syscoin-cli -regtest generate 101', function(error, stdout, stderr) {
+        exec(conf.daemonBinaryPath + 'syscoin-cli -regtest generate 101', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {
@@ -17,24 +17,24 @@ module.exports = {
       })
       .pause(1000, function() {
         console.log('get last transaction')
-        exec('./daemon_scripts/bin/syscoin-cli -regtest listtransactions "" 1', function(error, stdout, stderr) {
+        exec(conf.daemonBinaryPath + 'syscoin-cli -regtest listtransactions "" 1', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {
             console.log('exec error: ' + error)
           }
-          fs.writeFileSync('listtransactions-sys.txt', stdout, 'utf-8')
+          fs.writeFileSync('temp/listtransactions-sys.txt', stdout, 'utf-8')
         })
       })
       .pause(1000, function() {
         console.log('get account address')
-        exec('./daemon_scripts/bin/syscoin-cli -regtest getaccountaddress ""', function(error, stdout, stderr) {
+        exec(conf.daemonBinaryPath + 'syscoin-cli -regtest getaccountaddress ""', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {
             console.log('exec error: ' + error)
           }
-          fs.writeFileSync('accountaddress-sys.txt', stdout, 'utf-8')
+          fs.writeFileSync('temp/accountaddress-sys.txt', stdout, 'utf-8')
         })
       })
       .pause(1000)

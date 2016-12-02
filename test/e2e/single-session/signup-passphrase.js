@@ -5,7 +5,7 @@ var conf = require('../../../nightwatch.conf.js'),
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/signup-passphrase' + step +'.png';
+  return 'screenshots/signup-passphrase' + step + '.png';
 }
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
       .getAttribute('.btn-add-account', 'disabled', function(result) {
         console.log('button add account should be disabled')
         this.verify.equal(result.value, 'true')
-        generatedPassphraseText = fs.readFileSync('savedpassphrase.txt', 'utf-8')
+        generatedPassphraseText = fs.readFileSync('temp/savedpassphrase.txt', 'utf-8')
       })
       .saveScreenshot(getScreenshotUrl())
       .setValue('#passphrase', generatedPassphraseText)

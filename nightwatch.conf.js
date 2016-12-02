@@ -27,6 +27,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
   'custom_commands_path' : 'node_modules/nightwatch-custom-commands-assertions/js/commands',
   'custom_assertions_path' : 'node_modules/nightwatch-custom-commands-assertions/js/assertions',
   'iguanaGuiURL': 'file:///home/pbca/Iguana-GUI/compiled/dev/',
+  'daemonBinaryPath': './daemon_scripts/bin/',
   'src_folders': [
     'test/e2e'     // we use /test as the name of our test directory by default. so test/e2e for e2e
   ],

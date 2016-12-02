@@ -14,7 +14,7 @@ function getScreenshotUrl() {
 }
 
 function getTx() {
-  return JSON.parse(fs.readFileSync('listtransactions-doge.txt', 'utf-8'))[0]; // tx are in default order while in ui they're in reverse
+  return JSON.parse(fs.readFileSync('temp/listtransactions-doge.txt', 'utf-8'))[0]; // tx are in default order while in ui they're in reverse
 }
 
 module.exports = {

@@ -5,7 +5,7 @@ var conf = require('../../../nightwatch.conf.js'),
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/signup-page-check-' + step +'.png';
+  return 'screenshots/signup-page-check-' + step + '.png';
 }
 
 module.exports = {
@@ -32,7 +32,7 @@ module.exports = {
           console.log(chalk.green(' ✔') + ' Passphrase is correct')
         else
           console.log(chalk.red(' ✖') + ' Passphrase is incorrect!')
-        fs.writeFileSync('savedpassphrase.txt', generatedPassphraseText, 'utf-8')
+        fs.writeFileSync('temp/savedpassphrase.txt', generatedPassphraseText, 'utf-8')
       })
       .click('label.checkbox-label')
       .getAttribute('.btn-verify-passphrase', 'disabled', function(result) {

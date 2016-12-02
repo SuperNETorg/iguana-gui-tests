@@ -4,7 +4,7 @@ var conf = require('../../../nightwatch.conf.js'),
 
 function getScreenshotUrl() {
   step++;
-  return 'screenshots/signup-passphrase-success' + step +'.png';
+  return 'screenshots/signup-passphrase-success' + step + '.png';
 }
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
       .keys(browser.Keys.ESCAPE)
       .pause(5000, function() {
         console.log('restart syscoind')
-        exec('./daemon_scripts/bin/syscoind -regtest -daemon', function(error, stdout, stderr) {
+        exec(conf.daemonBinaryPath + 'syscoind -regtest -daemon', function(error, stdout, stderr) {
           console.log('stdout: ' + stdout)
           console.log('stderr: ' + stderr)
           if (error !== null) {
