@@ -33,7 +33,7 @@ function getBalance() {
  */
 
 module.exports = {
-  'test IguanaGUI check dashboard w/ non-empty doge wallet': function(browser) {
+  'test IguanaGUI dashboard w/ non-empty doge wallet': function(browser) {
     browser
       .verify.containsText('.balance-block .currency', currency.toUpperCase())
       .verify.containsText('.balance-block .value', Number(usdCurrencyRate().DOGE.USD * getBalance()).toFixed(2))

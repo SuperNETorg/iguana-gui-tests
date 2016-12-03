@@ -26,7 +26,7 @@ function getBalance() {
 }
 
 module.exports = {
-  'test IguanaGUI check dashboard w/ empty sys wallet': function(browser) {
+  'test IguanaGUI dashboard receive coin modal': function(browser) {
     browser
       .click('.transactions-unit .action-buttons .btn-receive')
       .waitForElementVisible('.receiving-coin-content .form-header .title')

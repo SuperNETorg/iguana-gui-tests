@@ -13,7 +13,7 @@ var getScreenshotUrl = (function(name) {
 })('dashboard-check-empty-sys-wallet');
 
 module.exports = {
-  'test IguanaGUI check dashboard w/ empty sys wallet': function(browser) {
+  'test IguanaGUI dashboard w/ empty sys wallet': function(browser) {
     browser
       .verify.containsText('.balance-block .currency', currency.toUpperCase())
       .verify.containsText('.balance-block .value', 0)
