@@ -26,3 +26,4 @@ Test coverage so far:
 - Signin with test SYS wallet and check non-empty dashboard
 - Signin with test SYS wallet (empty) and add test DOGE wallet (non-empty) from within the dashboard
 - Signin with test SYS wallet and add test DOGE wallet from within the dashboard
+- Signin with test SYS wallet and test receive coin modal

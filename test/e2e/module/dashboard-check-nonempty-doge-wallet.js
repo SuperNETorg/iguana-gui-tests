@@ -27,6 +27,11 @@ function getBalance() {
   return Number(fs.readFileSync('temp/getbalance-doge.txt', 'utf-8'));
 }
 
+/*
+ *  Note: currency values assertions are likely to fail from time to time. It may happen due to rate change while test sequence is executing.
+ *  TODO: add approx assertion to check whether or not currency values are falling under a predictable range of fiat values.
+ */
+
 module.exports = {
   'test IguanaGUI check dashboard w/ non-empty doge wallet': function(browser) {
     browser
