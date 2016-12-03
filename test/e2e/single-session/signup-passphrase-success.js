@@ -1,11 +1,14 @@
 var conf = require('../../../nightwatch.conf.js'),
-    step = -1,
     exec = require('child_process').exec;
 
-function getScreenshotUrl() {
-  step++;
-  return 'screenshots/signup-passphrase-success' + step + '.png';
-}
+var getScreenshotUrl = (function(name) {
+    var counter = -1;
+
+    return function () {
+      counter += 1;
+      return 'screenshots/' + name + '-' + counter + '.png';
+    }
+})('signup-passphrase-success');
 
 module.exports = {
   'test IguanaGUI execute signup sequence w/ success outcome': function(browser) {

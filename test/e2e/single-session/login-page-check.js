@@ -1,10 +1,13 @@
-var conf = require('../../../nightwatch.conf.js'),
-    step = -1;
+var conf = require('../../../nightwatch.conf.js');
 
-function getScreenshotUrl() {
-  step++;
-  return 'screenshots/login-check-' + step +'.png';
-}
+var getScreenshotUrl = (function(name) {
+    var counter = -1;
+
+    return function () {
+      counter += 1;
+      return 'screenshots/' + name + '-' + counter + '.png';
+    }
+})('login-check');
 
 module.exports = {
   'test IguanaGUI Index page check': function(browser) {
@@ -21,5 +24,6 @@ module.exports = {
       console.log('signup button should be enabled')
       this.verify.equal(result.value, null)
     })
+    .saveScreenshot(getScreenshotUrl())
   }
 };

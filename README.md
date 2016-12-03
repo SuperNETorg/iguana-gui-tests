@@ -5,7 +5,6 @@ sudo apt-get update
 sudo apt-get install openjdk-7-jdk
 
 npm install
-npm test
 
 npm install will download Selenium v2.53
 

@@ -1,10 +1,13 @@
-var conf = require('../../../nightwatch.conf.js'),
-    step = -1;
+var conf = require('../../../nightwatch.conf.js');
 
-function getScreenshotUrl() {
-  step++;
-  return 'screenshots/signin-to-dashboard-' + step + '.png';
-}
+var getScreenshotUrl = (function(name) {
+    var counter = -1;
+
+    return function () {
+      counter += 1;
+      return 'screenshots/' + name + '-' + counter + '.png';
+    }
+})('signin-to-dashboard');
 
 module.exports = {
   'test IguanaGUI singin to dashboard': function(browser) {

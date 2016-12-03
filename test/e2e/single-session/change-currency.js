@@ -1,10 +1,13 @@
-var conf = require('../../../nightwatch.conf.js'),
-    step = -1;
+var conf = require('../../../nightwatch.conf.js');
 
-function getScreenshotUrl() {
-  step++;
-  return 'screenshots/change-currency-' + step +'.png';
-}
+var getScreenshotUrl = (function(name) {
+    var counter = -1;
+
+    return function () {
+      counter += 1;
+      return 'screenshots/' + name + '-' + counter + '.png';
+    }
+})('change-currency');
 
 module.exports = {
   'test IguanaGUI change currency': function(browser) {

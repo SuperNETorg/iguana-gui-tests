@@ -1,5 +1,4 @@
 var conf = require('../../../nightwatch.conf.js'),
-    step = -1,
     fs = require('fs'),
     currency = 'usd',
     coin = 'doge',
@@ -8,10 +7,14 @@ var conf = require('../../../nightwatch.conf.js'),
     txData,
     defaultAddress;
 
-function getScreenshotUrl() {
-  step++;
-  return 'screenshots/dashboard-check-nonempty-doge-wallet-' + step +'.png';
-}
+var getScreenshotUrl = (function(name) {
+    var counter = -1;
+
+    return function () {
+      counter += 1;
+      return 'screenshots/' + name + '-' + counter + '.png';
+    }
+})('dashboard-check-nonempty-doge-wallet');
 
 function getTx() {
   return JSON.parse(fs.readFileSync('temp/listtransactions-doge.txt', 'utf-8'))[0]; // tx are in default order while in ui they're in reverse

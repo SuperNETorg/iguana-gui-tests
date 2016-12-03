@@ -1,12 +1,15 @@
 var conf = require('../../../nightwatch.conf.js'),
-    step = -1,
     generatedPassphraseText,
     fs = require('fs');
 
-function getScreenshotUrl() {
-  step++;
-  return 'screenshots/signup-page-check-' + step + '.png';
-}
+var getScreenshotUrl = (function(name) {
+    var counter = -1;
+
+    return function () {
+      counter += 1;
+      return 'screenshots/' + name + '-' + counter + '.png';
+    }
+})('signup-page-check');
 
 module.exports = {
   'test IguanaGUI Create account page check': function(browser) {

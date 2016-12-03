@@ -1,10 +1,13 @@
-var conf = require('../../../nightwatch.conf.js'),
-    step = -1;
+var conf = require('../../../nightwatch.conf.js');
 
-function getScreenshotUrl() {
-  step++;
-  return 'screenshots/login-add-wallet-sys-' + step +'.png';
-}
+var getScreenshotUrl = (function(name) {
+    var counter = -1;
+
+    return function () {
+      counter += 1;
+      return 'screenshots/' + name + '-' + counter + '.png';
+    }
+})('login-add-wallet-sys');
 
 module.exports = {
   'test IguanaGUI execute add a wallet': function(browser) {

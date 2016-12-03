@@ -1,10 +1,13 @@
-var conf = require('../../../nightwatch.conf.js'),
-    step = -1;
+var conf = require('../../../nightwatch.conf.js');
 
-function getScreenshotUrl() {
-  step++;
-  return 'screenshots/signup-after-wallet-encrypt-' + step + '.png';
-}
+var getScreenshotUrl = (function(name) {
+    var counter = -1;
+
+    return function () {
+      counter += 1;
+      return 'screenshots/' + name + '-' + counter + '.png';
+    }
+})('signup-after-wallet-encrypt');
 
 module.exports = {
   'test IguanaGUI execute signin w/ a passphrase created before': function(browser) {
