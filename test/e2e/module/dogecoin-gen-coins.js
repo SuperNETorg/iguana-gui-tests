@@ -38,6 +38,17 @@ module.exports = {
           fs.writeFileSync('temp/accountaddress-doge.txt', stdout, 'utf-8')
         })
       })
+      .pause(1000, function() {
+        console.log('get account balance')
+        exec(conf.daemonBinaryPath + 'dogecoin-cli -regtest getbalance ""', function(error, stdout, stderr) {
+          console.log('stdout: ' + stdout)
+          console.log('stderr: ' + stderr)
+          if (error !== null) {
+            console.log('exec error: ' + error)
+          }
+          fs.writeFileSync('temp/getbalance-doge.txt', stdout, 'utf-8')
+        })
+      })
       .pause(1000)
       .url(conf.iguanaGuiURL + 'index.html#/dashboard')
       .pause(2000)

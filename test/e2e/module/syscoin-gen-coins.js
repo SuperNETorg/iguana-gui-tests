@@ -37,6 +37,17 @@ module.exports = {
           fs.writeFileSync('temp/accountaddress-sys.txt', stdout, 'utf-8')
         })
       })
+      .pause(1000, function() {
+        console.log('get account balance')
+        exec(conf.daemonBinaryPath + 'syscoin-cli -regtest getbalance ""', function(error, stdout, stderr) {
+          console.log('stdout: ' + stdout)
+          console.log('stderr: ' + stderr)
+          if (error !== null) {
+            console.log('exec error: ' + error)
+          }
+          fs.writeFileSync('temp/getbalance-sys.txt', stdout, 'utf-8')
+        })
+      })
       .pause(1000)
       .url(conf.iguanaGuiURL + 'index.html#/dashboard')
       .pause(2000)

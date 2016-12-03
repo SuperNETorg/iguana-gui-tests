@@ -2,7 +2,6 @@ var conf = require('../../../nightwatch.conf.js'),
     fs = require('fs'),
     currency = 'usd',
     coin = 'doge',
-    genSysVal = 20500000, // TODO: read from getbalance rpc output
     coinFullName = 'Dogecoin',
     txData,
     defaultAddress;
@@ -20,10 +19,19 @@ function getTx() {
   return JSON.parse(fs.readFileSync('temp/listtransactions-doge.txt', 'utf-8'))[0]; // tx are in default order while in ui they're in reverse
 }
 
+function usdCurrencyRate() {
+  return JSON.parse(fs.readFileSync('temp/sys-doge-rate.txt', 'utf-8'));
+}
+
+function getBalance() {
+  return Number(fs.readFileSync('temp/getbalance-doge.txt', 'utf-8'));
+}
+
 module.exports = {
   'test IguanaGUI check dashboard w/ non-empty doge wallet': function(browser) {
     browser
       .verify.containsText('.balance-block .currency', currency.toUpperCase())
+      .verify.containsText('.balance-block .value', Number(usdCurrencyRate().DOGE.USD * getBalance()).toFixed(2))
     browser // check sidebar values
       .pause('3000')
       .click('.account-coins-repeater .doge')
@@ -31,12 +39,17 @@ module.exports = {
       .verify.cssClassPresent('.account-coins-repeater .doge', 'active')
       .verify.containsText('.account-coins-repeater .doge .name', coinFullName)
       .verify.containsText('.account-coins-repeater .doge .coin-value', coin.toUpperCase())
-      .verify.containsText('.account-coins-repeater .doge .coin-value .val', genSysVal)
+      .verify.containsText('.account-coins-repeater .doge .coin-value .val', getBalance().toFixed(1))
       .verify.containsText('.account-coins-repeater .doge .currency-value', currency.toUpperCase())
+      .verify.containsText('.account-coins-repeater .doge .currency-value .val', Number(usdCurrencyRate().DOGE.USD * getBalance()).toFixed(2))
       // check transaction unit balances
       .verify.cssClassNotPresent('.transactions-unit .action-buttons .btn-send', 'disabled')
       .waitForElementNotPresent('.transactions-unit .top-bar .loader')
       .waitForElementNotPresent('.transactions-unit .transactions-list .loader')
+      .verify.containsText('.transactions-unit .top-bar .active-coin-balance .value', getBalance().toFixed(1))
+      .verify.containsText('.transactions-unit .top-bar .active-coin-balance .coin-name', coin.toUpperCase())
+      .verify.containsText('.transactions-unit .top-bar .active-coin-balance-currency .value', Number(usdCurrencyRate().DOGE.USD * getBalance()).toFixed(2))
+      .verify.containsText('.transactions-unit .top-bar .active-coin-balance-currency .currency', currency.toUpperCase())
       // the first tx should be of receive category and in process
       .waitForElementVisible('.transactions-list-repeater .item:first-child')
       .verify.cssClassPresent('.transactions-list-repeater .item:first-child', 'process')
