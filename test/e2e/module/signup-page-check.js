@@ -12,7 +12,7 @@ var getScreenshotUrl = (function(name) {
 })('signup-page-check');
 
 module.exports = {
-  'test IguanaGUI vreate account page check': function(browser) {
+  'test IguanaGUI create account page check': function(browser) {
     browser
       .click('.btn-signup')
       .waitForElementVisible('.create-account-form')
