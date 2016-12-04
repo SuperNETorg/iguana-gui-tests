@@ -10,7 +10,7 @@
 
   // add your coind passphrases her one per each coin
   // on a login step they will be used as as source for walletpassphrase sequence
-  dev.coinPW = {
+  /*dev.coinPW = {
     'coind': {
       'btc': 'teach clutch code nominee ride garage fish neutral help upset correct decorate',
       'btcd': 'teach clutch code nominee ride garage fish neutral help upset correct decorate',
@@ -22,7 +22,7 @@
       'mzc': '1234'
     },
     'iguana': 'lime lime'
-  };
+  };*/
 
   // add an account per coin if you want to override 'own' account
   dev.coinAccountsDev = {
@@ -39,7 +39,7 @@
   };
 
 // dev
-var sendDataTest = { 'btcd': { address: 'R9XTAMpr2Sm4xxUQA1g1brxPZGaTvj9xqp', val: '0.00001', note: 'gui test send to kashi\'s addr' },
+/*var sendDataTest = { 'btcd': { address: 'R9XTAMpr2Sm4xxUQA1g1brxPZGaTvj9xqp', val: '0.00001', note: 'gui test send to kashi\'s addr' },
                      'sys': { address: '127a42hPqaUy6zBbgfo5HHh7G9WGBQYQR4', val: '0.00001', note: 'gui test send to ed888 addr' } };
 
 function loadTestSendData(coin) {
@@ -48,4 +48,4 @@ function loadTestSendData(coin) {
     $('.tx-amount').val(sendDataTest[coin].val);
     $('.tx-note').val(sendDataTest[coin].note);
   }
-}
+}*/

@@ -22,13 +22,12 @@ angular.module('IguanaGUIApp')
           authActiveCoinObj = [];
 
       authActiveCoinArray[0] = $scope.activeCoin;
-      authActiveCoinObj[0] = {
+      authActiveCoinObj[$scope.activeCoin] = {
         id: $scope.activeCoin.toUpperCase(),
         coinId: $scope.activeCoin
       };
 
       $auth.login(
-        authActiveCoinArray,
         authActiveCoinObj,
         $scope.passphrase
       )

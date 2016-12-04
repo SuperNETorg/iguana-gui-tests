@@ -1,17 +1,17 @@
 syscoin=/home/pbca/.syscoin/regtest
 dogecoin=/home/pbca/.dogecoin/regtest
 
-./bin/syscoin-cli stop
-#./bin/dogecoin-cli stop
-sleep 4
+./daemon_scripts/bin/syscoin-cli stop
+./daemon_scripts/bin/dogecoin-cli stop
+sleep 6
 
 rm "$syscoin" -rf
 echo "$syscoin removed"
 
-#rm "$dogecoin" -rf
-#echo "$dogecoin removed"
+rm "$dogecoin" -rf
+echo "$dogecoin removed"
 
-./bin/syscoind -regtest -daemon
+./daemon_scripts/bin/syscoind -regtest -daemon
+sleep 4
 
-#cd ../
-#npm test
+npm test test/e2e/$1

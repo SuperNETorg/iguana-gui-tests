@@ -1,5 +1,6 @@
 var conf = require('../../../nightwatch.conf.js'),
     generatedPassphraseText,
+    chalk = require('chalk'),
     fs = require('fs');
 
 var getScreenshotUrl = (function(name) {

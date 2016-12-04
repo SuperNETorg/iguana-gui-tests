@@ -23,13 +23,15 @@ Coind are running in regtest mode to eliminate issues with latency and precise a
 https://bitcoin.org/en/developer-examples#regtest-mode
 
 Test coverage so far:
-- Encrypt already encrypted SYS wallet
-- Encrypt unencrypted SYS wallet and signin into dashboard
-- Signin with test SYS wallet and change currency
-- Signin with test SYS wallet and check empty dashboard
-- Signin with test SYS wallet and check non-empty dashboard
-- Signin with test SYS wallet (empty) and add test DOGE wallet (non-empty) from within the dashboard
-- Signin with test SYS wallet and add test DOGE wallet from within the dashboard
-- Signin with test SYS wallet and test receive coin modal
-- Signin with test SYS wallet and test send coin modal fields
-- Signin with test SYS wallet, send 10 SYS to self address, check that 10 SYS were spent and received
+- Open index and add choose SYS wallet (**npm run coind-add-wallet**)
+- Encrypt SYS wallet (**npm run coind-signup-success**)
+- Encrypt already encrypted SYS wallet (**npm run coind-signup-error**)
+- Encrypt unencrypted SYS wallet and signin into dashboard (**npm run coind-signup-w-signin**)
+- Signin with test SYS wallet and change currency (**npm run coind-signin-change-currency**)
+- Signin with test SYS wallet and check empty dashboard (**npm run coind-dashboard-empty-wallet**)
+- Signin with test SYS wallet and check non-empty dashboard (**npm run coind-dashboard-check-sys-wallet**)
+- Signin with test SYS wallet (empty) and add test DOGE wallet (non-empty) from within the dashboard (**npm run coind-dashboard-check-empty-nonempty-wallets**)
+- Signin with test SYS wallet and add test DOGE wallet from within the dashboard (**npm run coind-signin-add-2nd-wallet**)
+- Signin with test SYS wallet and test receive coin modal (**npm run coind-dashboard-check-receive-coin**)
+- Signin with test SYS wallet and test send coin modal fields (**npm run coind-dashboard-check-send-keying**)
+- Signin with test SYS wallet, send 10 SYS to self address, check that 10 SYS were spent and received (**npm run coind-dashboard-check-send-coin**)

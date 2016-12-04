@@ -41,7 +41,7 @@ module.exports = {
       .verify.cssClassPresent('.account-coins-repeater .sys', 'active')
       .verify.containsText('.account-coins-repeater .sys .name', coinFullName)
       .verify.containsText('.account-coins-repeater .sys .coin-value', coin.toUpperCase())
-      .verify.containsText('.account-coins-repeater .sys .coin-value .val', getBalance().toFixed(1))
+      .verify.containsText('.account-coins-repeater .sys .coin-value .val', getBalance().toFixed(0))
       .verify.containsText('.account-coins-repeater .sys .currency-value', currency.toUpperCase())
       .verify.containsText('.account-coins-repeater .sys .currency-value .val', Number(usdCurrencyRate().SYS.USD * getBalance()).toFixed(2))
     browser // check transaction unit balances
@@ -49,7 +49,7 @@ module.exports = {
       .verify.cssClassNotPresent('.transactions-unit .action-buttons .btn-send', 'disabled')
       .waitForElementNotPresent('.transactions-unit .top-bar .loader')
       .waitForElementNotPresent('.transactions-unit .transactions-list .loader')
-      .verify.containsText('.transactions-unit .top-bar .active-coin-balance .value', getBalance().toFixed(1))
+      .verify.containsText('.transactions-unit .top-bar .active-coin-balance .value', getBalance().toFixed(0))
       .verify.containsText('.transactions-unit .top-bar .active-coin-balance .coin-name', coin.toUpperCase())
       .verify.containsText('.transactions-unit .top-bar .active-coin-balance-currency .value', Number(usdCurrencyRate().SYS.USD * getBalance()).toFixed(2))
       .verify.containsText('.transactions-unit .top-bar .active-coin-balance-currency .currency', currency.toUpperCase())

@@ -45,6 +45,7 @@ module.exports = {
       .verify.containsText('.modal-send-coin .pop-detail.crncy.chk-crncy.crncy-fee h3', 1 + ' ' + coin.toUpperCase())
       .verify.containsText('.modal-send-coin .pop-detail.crncy.chk-crncy.crncy-fee h5', Number(1 * usdCurrencyRate().SYS.USD).toFixed(4)) //+ ' ' + currency.toUpperCase())
       .verify.containsText('.modal-send-coin .btn-confirm-tx', 'Send ' + 10 + ' ' + coin.toUpperCase())
+      .verify.containsText('.modal-send-coin .pop-detail.pay-dtl p', 'iguana test suite automated send coin')
       .saveScreenshot(getScreenshotUrl())
       .click('.modal-send-coin .btn-confirm-tx')
       .waitForElementVisible('.send-coin-confirm-passphrase .form-header .title')

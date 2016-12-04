@@ -1,4 +1,5 @@
-var conf = require('../../../nightwatch.conf.js');
+var conf = require('../../../nightwatch.conf.js'),
+    fs = require('fs');
 
 var getScreenshotUrl = (function(name) {
     var counter = -1;

@@ -14,7 +14,7 @@ module.exports = {
     browser
       .url(conf.iguanaGuiURL + 'index.html#/settings')
       .waitForElementVisible('.currency-content', 5000)
-      .verify.title('Iguana / settings')
+      .verify.title('Iguana / Settings')
       .saveScreenshot(getScreenshotUrl())
       .click('.currency-loop .country-li:nth-child(2)') // select EUR
       .verify.cssClassPresent('.currency-loop .country-li:nth-child(2)', 'active')

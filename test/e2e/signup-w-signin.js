@@ -1,4 +1,4 @@
-var ext = require('../../../nightwatch.conf.js');
+var ext = require('../../nightwatch.conf.js');
 
 /*
  * Description:
@@ -7,6 +7,6 @@ var ext = require('../../../nightwatch.conf.js');
  */
 
 // tests
-module.exports = ext.extend(module.exports, require('./module/signup-success'));
+module.exports = ext.extend(module.exports, require('./signup-success'));
 module.exports = ext.extend(module.exports, require('./module/add-wallet-2nd-time'));
 module.exports = ext.extend(module.exports, require('./module/signup-signin-after-wallet-encrypt'));
