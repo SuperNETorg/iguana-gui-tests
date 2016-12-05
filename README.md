@@ -18,7 +18,7 @@ Place syscoind, syscoin-cli, dogecoin-cli, dogecoind in daemon_scripts/bin folde
 
 Allow .sh scripts in daemon_scripts dir to execute as binaries
 
-Coind are running in regtest mode to eliminate issues with latency and precise assertions.
+Coind are running in regtest mode to eliminate latency issues
 
 https://bitcoin.org/en/developer-examples#regtest-mode
 
