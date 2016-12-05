@@ -25,17 +25,17 @@
   };*/
 
   // add an account per coin if you want to override 'own' account
-  dev.coinAccountsDev = {
+  /*dev.coinAccountsDev = {
     'coind': {
       'ltc': 'default',
       'btcd': 'pbca'
     }
-  };
+  };*/
 
   // for simultaneous dev in iguana and non-iguana modes
   dev.sessions = {
-    'Chrome': false, // true - iguana, false - coind
-    'Firefox': true
+    'Chrome': true, // true - iguana, false - coind
+    'Firefox': false
   };
 
 // dev

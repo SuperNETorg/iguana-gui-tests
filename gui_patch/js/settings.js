@@ -16,7 +16,7 @@ var _settings = {
   defaultSessionLifetimeCoind: 2629743, // sec, ~1 month
   defaultWalletUnlockPeriod: 3, // sec
   defaultTransactionsCount: 20,
-  defaultAccountNameIguana: 'default', // note: change to a specific account name if needed; default coind account name is empty string
+  defaultAccountNameIguana: '', // note: change to a specific account name if needed; default coind account name is empty string
   defaultAccountNameCoind: '',
   txUnitProgressStatusMinConf: 10,
   iguanaNullReturnCountThreshold: 30,
