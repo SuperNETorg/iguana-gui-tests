@@ -40,4 +40,6 @@ Test coverage so far:
 ## Iguana ##
 - Singin w/ SYS coin (**npm run iguana-signin**)
 - Select 3 coins via addcoin modal (**npm run iguana-check-addcoin-modal**)
+- Singin w/ SYS coin and add DOGE coin from within the dashboard (**npm run iguana-signin-add-2nd-wallet**)
 - Singin w/ SYS and DOGE coins (**npm run iguana-signin-2-empty-wallets**)
+- Signup w/ SYS coin (**npm run iguana-signup**)
