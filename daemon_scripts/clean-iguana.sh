@@ -1,6 +1,11 @@
+syscoin=/home/pbca/.syscoin/regtest
+dogecoin=/home/pbca/.dogecoin/regtest
+
 ./daemon_scripts/bin/syscoin-cli stop
 ./daemon_scripts/bin/dogecoin-cli stop
 sleep 6
+
+pkill iguana
 
 rm "daemon_scripts/bin/iguanacore/iguana/tmp/SYS" -rf
 rm "daemon_scripts/bin/iguanacore/iguana/DB/SYS" -rf
@@ -14,8 +19,11 @@ rm "daemon_scripts/bin/iguanacore/iguana/DB/ro/DOGE" -rf
 
 cd "daemon_scripts/bin/iguanacore/iguana/confs"
 rm $(ls -I '*.txt' -I '*.conf' -I '.tmpmarker')
-cd ../../../../../
+cd ../
+nohup ../agents/iguana &>/dev/null &
+cd ../../../../
 
+rm "$syscoin" -rf
 echo "$syscoin removed"
 
 rm "$dogecoin" -rf
