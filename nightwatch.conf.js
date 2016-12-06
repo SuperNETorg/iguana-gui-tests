@@ -11,6 +11,10 @@ const PKG = require('./package.json'); // so we can get the version of the proje
 const BINPATH = './node_modules/nightwatch/bin/'; // change if required.
 const SCREENSHOT_PATH = './node_modules/nightwatch/screenshots/' + PKG.version + '/'
 
+/*
+ *  extend tests
+ *  provides an ability to reuse tests as modules
+ */
 var extend = function(target) {
   var sources = [].slice.call(arguments, 1);
 
@@ -39,8 +43,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     'host': '127.0.0.1',
     'port': 4444,
     'cli_args': {
-      'webdriver.chrome.driver' : BINPATH + 'chromedriver'/*,
-      'webdriver.gecko.profile' : BINPATH + 'geckodriver'*/
+      'webdriver.chrome.driver' : BINPATH + 'chromedriver'
     }
   },
   'test_workers' : {
@@ -48,21 +51,6 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     'workers' : 'auto'
   }, // perform tests in parallel where possible
   'test_settings': {
-    'default': {
-      'launch_url': 'http://localhost', // we're testing a Public or 'staging' site on Saucelabs
-      'selenium_port': 80,
-      'selenium_host': 'ondemand.saucelabs.com',
-      'silent': true,
-      'screenshots': {
-        'enabled': true, // save screenshots to this directory (excluded by .gitignore)
-        'path': SCREENSHOT_PATH
-      },
-      'username' : 'pbca26',     // if you want to use Saucelabs remember to
-      'access_key' : 'd06c3ad3-baed-4965-bb1a-7be4a0a31137', // export your environment variables (see readme)
-      'globals': {
-        'waitForConditionTimeout': 10000    // wait for content on the page bsauefore continuing
-      }
-    },
     'local': {
       'launch_url': 'http://localhost',
       'selenium_port': 4444,
@@ -88,11 +76,6 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
         'javascriptEnabled': true,
         'acceptSslCerts': true
       }
-      /*'desiredCapabilities': { // not working, see selenium-debug.log for details
-        'browserName': 'firefox',
-        'javascriptEnabled': true,
-        'acceptSslCerts': true
-      }*/
     },
     'chrome': { // local chrome
       'desiredCapabilities': {
@@ -100,60 +83,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
         'javascriptEnabled': true,
         'acceptSslCerts': true
       }
-    },
-    /*'firefox': { // local firefox
-      'desiredCapabilities': {
-        'browserName': 'firefox',
-        'javascriptEnabled': true,
-        'acceptSslCerts': true
-      }
-    },*/
-    /* saucelabs list of browsers
-    'chromemac': {
-      'desiredCapabilities': {
-        'browserName': 'chrome',
-        'platform': 'OS X 10.11',
-        'version': '47'
-      }
-    },
-    'ie11': {
-      'desiredCapabilities': {
-        'browserName': 'internet explorer',
-        'platform': 'Windows 10',
-        'version': '11.0'
-      }
-    },
-    'firefox' : {
-      'desiredCapabilities': {
-        'platform': 'XP',
-        'browserName': 'firefox',
-        'version': '33'
-      }
-    },
-    'internet_explorer_10' : {
-      'desiredCapabilities': {
-        'platform': 'Windows 7',
-        'browserName': 'internet explorer',
-        'version': '10'
-      }
-    },
-    'android_s4_emulator': {
-      'desiredCapabilities': {
-        'browserName': 'android',
-        'deviceOrientation': 'portrait',
-        'deviceName': 'Samsung Galaxy S4 Emulator',
-        'version': '4.4'
-      }
-    },
-    'iphone_6_simulator': {
-      'desiredCapabilities': {
-        'browserName': 'iPhone',
-        'deviceOrientation': 'portrait',
-        'deviceName': 'iPhone 6',
-        'platform': 'OSX 10.10',
-        'version': '8.4'
-      }
-    }*/
+    }
   },
   extend: extend
 }
@@ -174,10 +104,6 @@ require('fs').stat(BINPATH + 'selenium.jar', function (err, stat) { // got it?
     });
   }
 });
-
-function padLeft(count) { // theregister.co.uk/2016/03/23/npm_left_pad_chaos/
-  return count < 10 ? '0' + count : count.toString();
-}
 
 var FILECOUNT = 0; // 'global' screenshot file count
 /**
