@@ -10,10 +10,10 @@ var getScreenshotUrl = (function(name) {
       counter += 1;
       return 'screenshots/' + name + '-' + counter + '.png';
     }
-})('signup-page-check');
+})('iguana-signup-page-check');
 
 module.exports = {
-  'test IguanaGUI create account page check': function(browser) {
+  'test IguanaGUI create account page check (iguana)': function(browser) {
     browser
       .click('.btn-signup')
       .waitForElementVisible('.create-account-form')
@@ -29,11 +29,11 @@ module.exports = {
         else
           return false;
       }, 2000)
-      .verify.containsText('.passphrase-word-count', '12')
+      .verify.containsText('.passphrase-word-count', '24')
       .getText('.generated-passhprase', function(result) { // TODO: make custom assert
         generatedPassphraseText = result.value
         var generatedPassphraseComponents = result.value.split(' ')
-        if (generatedPassphraseComponents.length === 12)
+        if (generatedPassphraseComponents.length === 24)
           console.log(chalk.green(' ✔') + ' Passphrase is correct')
         else
           console.log(chalk.red(' ✖') + ' Passphrase is incorrect!')

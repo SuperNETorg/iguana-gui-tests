@@ -1,7 +1,7 @@
 var ext = require('../../nightwatch.conf.js');
 
 /*
- * Description: login into test iguana/sys wallet
+ * Description: login into test iguana/sys, doge wallet
  *
  */
 

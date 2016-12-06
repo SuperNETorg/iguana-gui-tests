@@ -23,6 +23,7 @@
     "coind-dashboard-check-empty-nonempty-wallets": "./daemon_scripts/encrypt2.sh dashboard-check-empty-nonempty-wallets.js",
     "coind-dashboard-check-2-nonempty-wallets": "./daemon_scripts/encrypt2.sh dashboard-check-2-nonempty-wallets.js",
     "clean-iguana": "./daemon_scripts/clean-iguana.sh",
+    "iguana-signup": "./daemon_scripts/clean-iguana.sh iguana-signup.js",
     "iguana-signin": "./daemon_scripts/clean-iguana.sh iguana-signin.js",
     "iguana-check-addcoin-modal": "./daemon_scripts/clean-iguana.sh iguana-check-addcoin-modal.js",
     "iguana-signin-2-empty-wallets": "./daemon_scripts/clean-iguana.sh iguana-signin-2-empty-wallets.js",
