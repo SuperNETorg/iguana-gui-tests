@@ -23,6 +23,7 @@ Coind are running in regtest mode to eliminate latency issues
 https://bitcoin.org/en/developer-examples#regtest-mode
 
 Test coverage so far:
+## Coind ##
 - Open index and add choose SYS wallet (**npm run coind-add-wallet**)
 - Encrypt SYS wallet (**npm run coind-signup-success**)
 - Encrypt already encrypted SYS wallet (**npm run coind-signup-error**)
@@ -35,3 +36,8 @@ Test coverage so far:
 - Signin with test SYS wallet and test receive coin modal (**npm run coind-dashboard-check-receive-coin**)
 - Signin with test SYS wallet and test send coin modal fields (**npm run coind-dashboard-check-send-keying**)
 - Signin with test SYS wallet, send 10 SYS to self address, check that 10 SYS were spent and received (**npm run coind-dashboard-check-send-coin**)
+
+## Iguana ##
+- Singin w/ SYS coin (**npm run iguana-signin**)
+- Select 3 coins via addcoin modal (**npm run iguana-check-addcoin-modal**)
+- Singin w/ SYS and DOGE coins (**npm run iguana-signin-2-empty-wallets**)

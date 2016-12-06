@@ -25,6 +25,7 @@
     "clean-iguana": "./daemon_scripts/clean-iguana.sh",
     "iguana-signin": "./daemon_scripts/clean-iguana.sh iguana-signin.js",
     "iguana-check-addcoin-modal": "./daemon_scripts/clean-iguana.sh iguana-check-addcoin-modal.js",
+    "iguana-signin-2-empty-wallets": "./daemon_scripts/clean-iguana.sh iguana-signin-2-empty-wallets.js",
     "ie": "./node_modules/.bin/nightwatch -e ie11",
     "sauce": "./node_modules/.bin/nightwatch -e chrome,ie11,android_s4_emulator,iphone_6_simulator",
     "upload": "node test/e2e/upload_screenshots_to_s3.js",
