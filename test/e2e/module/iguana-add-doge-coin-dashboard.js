@@ -39,6 +39,9 @@ module.exports = {
           .pause(250)
           .waitForElementVisible('.dashboard', 5000)
           .saveScreenshot(getScreenshotUrl())
+          // verify that 2 coins are present in the dashboard
+          .verify.containsText('.account-coins-repeater .sys .coin-value .val', 0)
+          .verify.containsText('.account-coins-repeater .doge .coin-value .val', 0)
           .moveToElement('.coins .btn-add-coin', 2, 2, function() {
             browser
               .mouseButtonClick('left')

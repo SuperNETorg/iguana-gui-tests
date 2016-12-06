@@ -43,3 +43,4 @@ Test coverage so far:
 - Singin w/ SYS coin and add DOGE coin from within the dashboard (**npm run iguana-signin-add-2nd-wallet**)
 - Singin w/ SYS and DOGE coins (**npm run iguana-signin-2-empty-wallets**)
 - Signup w/ SYS coin (**npm run iguana-signup**)
+- Signin with test SYS wallet, send 10 SYS to self address, check that 10 SYS were spent and received (**npm run iguana-dashboard-send-coin**)
