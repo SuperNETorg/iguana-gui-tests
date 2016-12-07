@@ -6,15 +6,6 @@ var conf = require('../../../nightwatch.conf.js'),
     txData,
     defaultAddress;
 
-var getScreenshotUrl = (function(name) {
-    var counter = -1;
-
-    return function () {
-      counter += 1;
-      return 'screenshots/' + name + '-' + counter + '.png';
-    }
-})('dashboard-check-nonempty-sys-wallet');
-
 function getTx() {
   return JSON.parse(fs.readFileSync('temp/listtransactions-sys.txt', 'utf-8'))[0]; // tx are in default order while in ui they're in reverse
 }
@@ -34,6 +25,24 @@ function getBalance() {
 
 module.exports = {
   'test IguanaGUI dashboard w/ non-empty sys wallet': function(browser) {
+    var getScreenshotUrl = (function(name) {
+        var counter = -1;
+
+        return function () {
+          counter += 1;
+          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
+        }
+    })('dashboard-check-nonempty-sys-wallet');
+
+    var responsiveTest = function() {
+      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+        browser
+          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+      }
+    }
+
     browser
       .verify.containsText('.balance-block .currency', currency.toUpperCase())
       .verify.containsText('.balance-block .value', Number(usdCurrencyRate().SYS.USD * getBalance()).toFixed(2))
@@ -61,6 +70,8 @@ module.exports = {
       .verify.containsText('.transactions-list-repeater .item:first-child .amount .value', getTx().amount)
       .verify.containsText('.transactions-list-repeater .item:first-child .amount .coin-name', coin.toUpperCase())
       .verify.containsText('.transactions-list-repeater .item:first-child .hash', getTx().address)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
   }
 };

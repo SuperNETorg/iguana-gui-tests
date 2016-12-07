@@ -3,15 +3,6 @@ var conf = require('../../../nightwatch.conf.js'),
     coin = 'sys',
     coinFullName = 'Syscoin';
 
-var getScreenshotUrl = (function(name) {
-    var counter = -1;
-
-    return function () {
-      counter += 1;
-      return 'screenshots/' + name + '-' + counter + '.png';
-    }
-})('dashboard-check-empty-sys-wallet');
-
 module.exports = {
   'test IguanaGUI dashboard w/ empty sys wallet': function(browser) {
     browser

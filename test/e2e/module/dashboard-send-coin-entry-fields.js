@@ -4,15 +4,6 @@ var conf = require('../../../nightwatch.conf.js'),
     coin = 'sys',
     coinFullName = 'Syscoin';
 
-var getScreenshotUrl = (function(name) {
-    var counter = -1;
-
-    return function () {
-      counter += 1;
-      return 'screenshots/' + name + '-' + counter + '.png';
-    }
-})('dashboard-send-coin-sys-fields');
-
 function getAddress() {
   return fs.readFileSync('temp/accountaddress-sys.txt', 'utf-8');
 }
@@ -27,6 +18,24 @@ function getBalance() {
 
 module.exports = {
   'test IguanaGUI dashboard send coin modal': function(browser) {
+    var getScreenshotUrl = (function(name) {
+        var counter = -1;
+
+        return function () {
+          counter += 1;
+          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
+        }
+    })('dashboard-send-coin-sys-fields');
+
+    var responsiveTest = function() {
+      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+        browser
+          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+      }
+    }
+
     browser
       .click('.transactions-unit .action-buttons .btn-send')
       .waitForElementVisible('.modal-send-coin .form-header .title')
@@ -103,82 +112,114 @@ module.exports = {
       .pause(1000)
       .setValue('.modal-send-coin .tx-amount', ['100'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', Number(usdCurrencyRate().SYS.USD * 100).toFixed(2))
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['1000'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', Number(usdCurrencyRate().SYS.USD * 1000).toFixed(2))
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['0'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', '')
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['-100'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', 0)
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['abc'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', 0)
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['=$#;,'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', 0)
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['001'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-amount', 0.1)
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['10.01'])
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .pause(250)
       .verify.valueContains('.modal-send-coin .tx-amount', 10.01)
     browser
       .pause(1000)
       .setValue('.modal-send-coin .tx-fee', ['100'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', Number(usdCurrencyRate().SYS.USD * 100).toFixed(2))
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['1000'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', Number(usdCurrencyRate().SYS.USD * 1000).toFixed(2))
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['0'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', '')
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['-100'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', 0)
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['abc'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', 0)
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['=$#;,'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', 0)
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['001'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .verify.valueContains('.modal-send-coin .tx-fee', 0.1)
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['10.01'])
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .pause(250)
       .verify.valueContains('.modal-send-coin .tx-fee', 10.01)
   }

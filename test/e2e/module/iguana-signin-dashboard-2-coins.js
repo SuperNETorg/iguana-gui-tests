@@ -1,21 +1,32 @@
 var conf = require('../../../nightwatch.conf.js');
 
-var getScreenshotUrl = (function(name) {
-    var counter = -1;
-
-    return function () {
-      counter += 1;
-      return 'screenshots/' + name + '-' + counter + '.png';
-    }
-})('iguana-signin-to-dashboard-2-coins');
-
 module.exports = {
   'test IguanaGUI singin to dashboard w/ 2 coins (iguana)': function(browser) {
+    var getScreenshotUrl = (function(name) {
+        var counter = -1;
+
+        return function () {
+          counter += 1;
+          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
+        }
+    })('iguana-signin-to-dashboard-2-coins');
+
+    var responsiveTest = function() {
+      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+        browser
+          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+      }
+    }
+
     browser
       .clearValue('#passphrase')
       .setValue('#passphrase', ['test test'])
       .pause(250)
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .getAttribute('.btn-signin', 'disabled', function(result) {
         console.log('singin button should be enabled')
         this.verify.equal(result.value, null)
@@ -25,8 +36,12 @@ module.exports = {
       .waitForElementVisible('.iguana-modal')
       .verify.cssClassPresent('.iguana-modal', 'msg-green')
       .verify.containsText('.msg-body span', 'SYS, DOGE added')
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
       .waitForElementVisible('.dashboard')
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
   }
 };

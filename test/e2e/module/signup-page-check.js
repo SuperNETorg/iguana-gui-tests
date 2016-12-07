@@ -3,17 +3,26 @@ var conf = require('../../../nightwatch.conf.js'),
     chalk = require('chalk'),
     fs = require('fs');
 
-var getScreenshotUrl = (function(name) {
-    var counter = -1;
-
-    return function () {
-      counter += 1;
-      return 'screenshots/' + name + '-' + counter + '.png';
-    }
-})('signup-page-check');
-
 module.exports = {
   'test IguanaGUI create account page check': function(browser) {
+    var getScreenshotUrl = (function(name) {
+        var counter = -1;
+
+        return function () {
+          counter += 1;
+          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
+        }
+    })('signup-page-check');
+
+    var responsiveTest = function() {
+      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+        browser
+          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+      }
+    }
+
     browser
       .click('.btn-signup')
       .waitForElementVisible('.create-account-form')
@@ -44,6 +53,8 @@ module.exports = {
         console.log('button next should be disabled')
         this.verify.equal(result.value, 'true')
       })
-      .saveScreenshot(getScreenshotUrl())
+      .pause(10, function() {
+        responsiveTest()
+      })
   }
 };

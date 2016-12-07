@@ -3,15 +3,6 @@ var conf = require('../../../nightwatch.conf.js'),
     coin = 'sys',
     coinFullName = 'Syscoin';
 
-var getScreenshotUrl = (function(name) {
-    var counter = -1;
-
-    return function () {
-      counter += 1;
-      return 'screenshots/' + name + '-' + counter + '.png';
-    }
-})('iguana-dashboard-check-empty-sys-wallet');
-
 module.exports = {
   'test IguanaGUI dashboard w/ empty sys wallet (iguana)': function(browser) {
     browser
@@ -29,5 +20,6 @@ module.exports = {
       .verify.cssClassPresent('.transactions-unit .action-buttons .btn-send', 'disabled')
       .waitForElementVisible('.transactions-unit .top-bar .loader')
       .waitForElementVisible('.transactions-unit .transactions-list .loader')
+
   }
 };

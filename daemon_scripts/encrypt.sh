@@ -18,4 +18,4 @@ sleep 6
 ./daemon_scripts/bin/syscoind -regtest -daemon
 sleep 3
 
-npm test test/e2e/$1
+./node_modules/.bin/nightwatch --env $1 -t test/e2e/$2

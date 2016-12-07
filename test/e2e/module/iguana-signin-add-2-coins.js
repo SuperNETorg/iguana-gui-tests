@@ -1,16 +1,25 @@
 var conf = require('../../../nightwatch.conf.js');
 
-var getScreenshotUrl = (function(name) {
-    var counter = -1;
-
-    return function () {
-      counter += 1;
-      return 'screenshots/' + name + '-' + counter + '.png';
-    }
-})('iguana-login-add-2-coins');
-
 module.exports = {
   'test IguanaGUI add 2 coins on login (iguana)': function(browser) {
+    var getScreenshotUrl = (function(name) {
+        var counter = -1;
+
+        return function () {
+          counter += 1;
+          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
+        }
+    })('iguana-login-add-2-coins');
+
+    var responsiveTest = function() {
+      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+        browser
+          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+      }
+    }
+
     browser
       .pause(3000)
       .moveToElement('.login-add-coin-selection-title', 2, 2, function() {
@@ -20,9 +29,10 @@ module.exports = {
           .pause(250)
           .waitForElementVisible('.add-new-coin-form-login-state')
           .saveScreenshot(getScreenshotUrl())
-        browser
           .setValue('.quick-search input[type=text]', ['syscoin'])
-          .saveScreenshot(getScreenshotUrl())
+          .pause(10, function() {
+            responsiveTest()
+          })
           .verify.cssClassPresent('.btn-next', 'disabled')
           .click('.supported-coins-repeater-inner .coin.sys')
           .pause(250)
@@ -33,10 +43,14 @@ module.exports = {
           .pause(250)
           .click('.supported-coins-repeater-inner .coin.doge')
           .verify.cssClassPresent('.supported-coins-repeater-inner .coin.doge', 'active')
-          .saveScreenshot(getScreenshotUrl())
+          .pause(10, function() {
+            responsiveTest()
+          })
           .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
-          .saveScreenshot(getScreenshotUrl())
+          .pause(10, function() {
+            responsiveTest()
+          })
           .pause(500)
           .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(1) div:first-child', 'Syscoin')
           .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(1) div:last-child', 'SYS')
