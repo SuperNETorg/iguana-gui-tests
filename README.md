@@ -1,12 +1,10 @@
 # Iguana GUI Testing Suite
-
+```
 sudo apt-get update
-
 sudo apt-get install openjdk-7-jdk
-
 npm install
-
 npm install will download Selenium v2.53
+```
 
 Other deps:
 - Built Iguana GUI
@@ -14,19 +12,21 @@ Other deps:
 - Built Syscoin binaries https://github.com/syscoin/syscoin2
 - Built Dogecoin binaries https://github.com/dogecoin/dogecoin
 
-Place syscoind, syscoin-cli, dogecoin-cli, dogecoind in daemon_scripts/bin folder.
+Place syscoind, syscoin-cli, dogecoin-cli, dogecoind in **daemon_scripts/bin** folder.
 
-Place iguana into daemon_scripts/bin/iguancore folder.
+Place iguana into **daemon_scripts/bin/iguancore** folder.
 
-Allow .sh scripts in daemon_scripts dir to execute as binaries
+Allow .sh scripts in daemon_scripts dir to execute as binaries.
 
-Coind are running in regtest mode to eliminate latency issues
+Coind are running in regtest mode to eliminate latency issues.
 
 https://bitcoin.org/en/developer-examples#regtest-mode
 
 # !Backup your wallet.dat before running any commands in regtest mode! #
 
+
 Test coverage so far:
+
 ## Coind ##
 - Open index and add choose SYS wallet (**npm run coind-add-wallet**)
 - Encrypt SYS wallet (**npm run coind-signup-success**)
@@ -63,13 +63,13 @@ Tested browsers in headless mode: Firefox, Chrome
 # How to run tests #
 cd to tests folder
 
-npm coind_test test/e2e/testnamehere.js to run a sequence of test modules
+**npm coind_test test/e2e/testnamehere.js** to run a sequence of test modules
 
 or
 
-npm coind_test test/e2e/module/testnamehere.js to run a specific test module
+**npm coind_test test/e2e/module/testnamehere.js** to run a specific test module
 
-**Test modules**
+##Test modules##
 You can combine multiple test modules into a single test by using extend function. This allows to reuse the same browser session to run tests in different order or repeating steps under different conditions or with different input values.
 
 ```
@@ -79,10 +79,10 @@ module.exports = ext.extend(module.exports, require('./module/modulenamehere'));
 module.exports = ext.extend(module.exports, require('./module/anothermodulenamehere'));
 ```
 
-**Responsive testing**
-run daemon_scripts/iguana-responsive-all.sh to execute all iguana specific tests and capture screenshots under different resolutions. Check screenshots/iguana folder after script is finished.
+##Responsive testing##
+run **daemon_scripts/iguana-responsive-all.sh** to execute all iguana specific tests and capture screenshots under different resolutions. Check screenshots/iguana folder after script is finished.
 
-run daemon_scripts/coind-responsive-all.sh to get coind responsive testing. Check screenshots/coind folder after script is finished.
+run **daemon_scripts/coind-responsive-all.sh** to get coind responsive testing. Check screenshots/coind folder after script is finished.
 
 **List of resolutions:**
 ```
@@ -113,8 +113,11 @@ Shell scripts assume default coind data location.
 ./dogecoin
 ```
 **clean.sh** wipe out coind regtest folders and restart coin daemons
+
 **encrypt.sh** wipe out coind regtest folders, stop dogecoind, start syscoind, encrypt syscoind w/ "test test" passphrase
+
 **encrypt2.sh** wipe out coind regtest folders, encrypt syscoind and dogecoind w/ "test test" passphrase
+
 **clean-iguana.sh** runs the same set of commands as in **clean.sh**, removes DOGE, SYS files from iguana/DB, iguana/tmp folders
 
 Check package.json for more examples on how to run tests.
