@@ -43,7 +43,8 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     'host': '127.0.0.1',
     'port': 4444,
     'cli_args': {
-      'webdriver.chrome.driver' : BINPATH + 'chromedriver'
+      'webdriver.chrome.driver': BINPATH + 'chromedriver',
+      'webdriver.gecko.driver': BINPATH + 'geckodriver' // v0.9, ff 48 and above
     }
   },
   'test_workers' : {
@@ -133,12 +134,8 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
         'waitForConditionTimeout': 15000 // on localhost sometimes internet is slow so wait...
       },
       'desiredCapabilities': {
-        'browserName': 'chrome',
-        'chromeOptions': {
-          'args': [
-            '--window-size=1280,800'
-          ]
-        },
+        'browserName': 'firefox',
+        'marionette': true,
         'javascriptEnabled': true,
         'acceptSslCerts': true
       }
@@ -200,6 +197,14 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     'chrome': { // local chrome
       'desiredCapabilities': {
         'browserName': 'chrome',
+        'javascriptEnabled': true,
+        'acceptSslCerts': true
+      }
+    }
+    'firefox': { // local firefox
+      'desiredCapabilities': {
+        'browserName': 'firefox',
+        'marionette': true,
         'javascriptEnabled': true,
         'acceptSslCerts': true
       }
