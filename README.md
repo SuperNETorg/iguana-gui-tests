@@ -3,8 +3,9 @@
 sudo apt-get update
 sudo apt-get install openjdk-7-jdk
 npm install
-npm install will download Selenium v2.53
 ```
+
+npm install will download Selenium v2.53
 
 Other deps:
 - Built Iguana GUI
@@ -61,7 +62,7 @@ export DISPLAY=:99
 Tested browsers in headless mode: Firefox, Chrome
 
 # How to run tests #
-cd to tests folder
+cd to project's folder
 
 **npm coind_test test/e2e/testnamehere.js** to run a sequence of test modules
 
@@ -106,7 +107,7 @@ run **daemon_scripts/coind-responsive-all.sh** to get coind responsive testing. 
 1920 x 1080
 ```
 
-**Automated coind/iguana cleanup and regtest**
+##Automated coind/iguana cleanup and regtest##
 Shell scripts assume default coind data location.
 ```
 ./syscoin
