@@ -134,8 +134,12 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
         'waitForConditionTimeout': 15000 // on localhost sometimes internet is slow so wait...
       },
       'desiredCapabilities': {
-        'browserName': 'firefox',
-        'marionette': true,
+        'browserName': 'chrome',
+        'chromeOptions': {
+          'args': [
+            '--window-size=1280,800'
+          ]
+        },
         'javascriptEnabled': true,
         'acceptSslCerts': true
       }
@@ -200,7 +204,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
         'javascriptEnabled': true,
         'acceptSslCerts': true
       }
-    }
+    },
     'firefox': { // local firefox
       'desiredCapabilities': {
         'browserName': 'firefox',
