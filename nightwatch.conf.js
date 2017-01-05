@@ -30,7 +30,7 @@ var extend = function(target) {
 const config = { // we use a nightwatch.conf.js file so we can include comments and helper functions
   'custom_commands_path' : 'node_modules/nightwatch-custom-commands-assertions/js/commands',
   'custom_assertions_path' : 'node_modules/nightwatch-custom-commands-assertions/js/assertions',
-  'iguanaGuiURL': 'file:///home/pbca/Iguana-GUI/compiled/dev/',
+  'iguanaGuiURL': 'file:///home/pbca/gui02/compiled/dev/',
   'daemonBinaryPath': './daemon_scripts/bin/',
   'src_folders': [
     'test/e2e' // we use /test as the name of our test directory by default. so test/e2e for e2e
@@ -54,6 +54,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
   'test_settings': {
     'coind_responsive': {
       'mode': 'coind',
+      'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [ // more viewports here http://viewportsizes.com/
         //'320 x 240',
         //'320 x 568',
@@ -100,6 +101,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'iguana_responsive': {
       'mode': 'iguana',
+      'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [ // more viewports here http://viewportsizes.com/
         //'320 x 240',
         //'320 x 568',
@@ -146,6 +148,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'coind': {
       'mode': 'coind',
+      'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [
         '1280 x 800' // screenshots are saved at this resolution
       ],
@@ -173,6 +176,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'iguana': {
       'mode': 'iguana',
+      'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [
         '1280 x 800' // screenshots are saved at this resolution
       ],
