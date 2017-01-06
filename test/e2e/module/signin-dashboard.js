@@ -11,12 +11,30 @@ module.exports = {
         }
     })('signin-to-dashboard');
 
-    var responsiveTest = function() {
-      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-        browser
-          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+    var responsiveTest = function(containerToScroll) {
+      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
+        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+          browser
+            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+            .execute(function(container, run) {
+              if (container) {
+                var elem = document.querySelector(container);
+                if (run === 0) {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
+                } else {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight / run);
+                  else
+                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+                }
+              }
+            }, [containerToScroll, a])
+            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+        }
       }
     }
 
@@ -25,17 +43,17 @@ module.exports = {
       .setValue('#passphrase', ['test test'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('window')
       })
-      .getAttribute('.btn-signin', 'disabled', function(result) {
+      .getAttribute('.btn-signin-account', 'disabled', function(result) {
         console.log('singin button should be enabled')
         this.verify.equal(result.value, null)
       })
-      .click('.btn-signin')
+      .click('.btn-signin-account')
       .pause(250)
       .waitForElementVisible('.dashboard', 5000)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('window')
       })
   }
 };

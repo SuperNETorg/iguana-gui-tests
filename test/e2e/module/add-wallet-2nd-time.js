@@ -21,9 +21,15 @@ module.exports = {
               if (container) {
                 var elem = document.querySelector(container);
                 if (run === 0) {
-                  elem.scrollTop = 0;
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
                 } else {
-                  elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight / run);
+                  else
+                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
                 }
               }
             }, [containerToScroll, a])
@@ -67,7 +73,7 @@ module.exports = {
           .click('.supported-coins-repeater-inner .coin.sys')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
           .pause(10, function() {
-            responsiveTest('.login-account-form')
+            responsiveTest('window')
           })
       })
   }

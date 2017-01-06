@@ -12,7 +12,6 @@ module.exports = {
     })('login-check');
 
     var responsiveTest = function(containerToScroll) {
-      console.log(browser.globals.test_settings.scrollByPoinsCount)
       for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
         for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
           var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
@@ -22,8 +21,14 @@ module.exports = {
               if (container) {
                 var elem = document.querySelector(container);
                 if (run === 0) {
-                  elem.scrollTop = 0;
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
                 } else {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight / run);
+                  else
                     elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
                 }
               }
@@ -40,7 +45,7 @@ module.exports = {
       .waitForElementVisible('.btn-signin')
       .waitForElementVisible('.btn-signup')
       .pause(10, function() {
-        responsiveTest('html')
+        responsiveTest('window')
       })
   }
 };

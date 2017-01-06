@@ -11,4 +11,4 @@ var ext = require('../../nightwatch.conf.js');
 module.exports = ext.extend(module.exports, require('./module/login-page-check'));
 module.exports = ext.extend(module.exports, require('./module/add-wallet'));
 module.exports = ext.extend(module.exports, require('./module/signin-dashboard'));
-module.exports = ext.extend(module.exports, require('./module/add-wallet-doge-dashboard'));
+module.exports = ext.extend(module.exports, require('./module/add-wallet-doge-dashboard-coind'));

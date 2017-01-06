@@ -11,68 +11,76 @@ module.exports = {
         }
     })('login-add-wallet-doge-dashboard');
 
-    var responsiveTest = function() {
-      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-        browser
-          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+    var responsiveTest = function(containerToScroll) {
+      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
+        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+          browser
+            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+            .execute(function(container, run) {
+              if (container) {
+                var elem = document.querySelector(container);
+                if (run === 0) {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
+                } else {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight / run);
+                  else
+                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+                }
+              }
+            }, [containerToScroll, a])
+            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+        }
       }
     }
 
     browser
       .pause(500)
       .verify.cssClassNotPresent('.coins .btn-add-coin', 'disabled')
-      .click('.coins .btn-add-coin')
-      .waitForElementVisible('.add-coin-login-form')
-      .waitForElementVisible('.add-coin-login-form .login-add-coin-selection-title')
-      .moveToElement('.login-add-coin-selection-title', 2, 2, function() {
+      .moveToElement('.coins .btn-add-coin', 2, 2, function() {
         console.log('this should open add coin modal')
         browser
           .mouseButtonClick('left')
           .pause(250)
           .waitForElementVisible('.add-new-coin-form-login-state')
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('.auth-add-coin-modal .modal-content')
           })
           .setValue('.quick-search input[type=text]', ['someunknowncoin'])
           .waitForElementNotPresent('.supported-coins-repeater-inner .coin', 500)
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('.auth-add-coin-modal .modal-content')
           })
           .clearValue('.quick-search input[type=text]')
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
-          .verify.cssClassPresent('.btn-next', 'disabled')
           .setValue('.quick-search input[type=text]', ['dogecoin'])
           .pause(500)
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
+          .pause(10, function() {
+            responsiveTest('.auth-add-coin-modal .modal-content')
+          })
           .click('.supported-coins-repeater-inner .coin.doge')
-          .verify.cssClassNotPresent('.btn-next', 'disabled')
-          .verify.cssClassPresent('.supported-coins-repeater-inner .coin.doge', 'active')
-          .pause(10, function() {
-            responsiveTest()
-          })
-          .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
-          .pause(10, function() {
-            responsiveTest()
-          })
           .waitForElementPresent('#passphrase')
           .clearValue('#passphrase')
           .setValue('#passphrase', ['test test'])
           .pause(250)
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('window')
           })
-          .getAttribute('.btn-signin', 'disabled', function(result) {
+          .getAttribute('.btn-signin-account', 'disabled', function(result) {
             console.log('singin button should be enabled')
             this.verify.equal(result.value, null)
           })
-          .click('.btn-signin')
+          .click('.btn-signin-account')
           .pause(250)
           .waitForElementVisible('.dashboard', 5000)
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('window')
           })
       })
   }
