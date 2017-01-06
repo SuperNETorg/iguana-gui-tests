@@ -1,3 +1,5 @@
+rm "./screenshots" -rf
+
 syscoin=/home/pbca/.syscoin/regtest
 dogecoin=/home/pbca/.dogecoin/regtest
 
