@@ -81,9 +81,13 @@ module.exports = ext.extend(module.exports, require('./module/anothermodulenameh
 ```
 
 ##Responsive testing##
-run **daemon_scripts/iguana-responsive-all.sh** to execute all iguana specific tests and capture screenshots under different resolutions. Check screenshots/iguana folder after script is finished.
+Run **daemon_scripts/iguana-responsive-all.sh** to execute all iguana specific tests and capture screenshots under different resolutions. Check screenshots/iguana folder after script is finished.
 
-run **daemon_scripts/coind-responsive-all.sh** to get coind responsive testing. Check screenshots/coind folder after script is finished.
+Run **daemon_scripts/coind-responsive-all.sh** to get coind responsive testing. Check screenshots/coind folder after script is finished.
+
+Duplicated screenshots are cleaned up after all scenarios are finished. This procedure is followed by png to jpg conversion to reduce screenshots' size.
+
+Use convert_screenshots.sh if you need to convert screenshots manually.
 
 **List of resolutions:**
 ```
