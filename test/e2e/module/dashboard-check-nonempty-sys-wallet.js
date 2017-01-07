@@ -34,12 +34,30 @@ module.exports = {
         }
     })('dashboard-check-nonempty-sys-wallet');
 
-    var responsiveTest = function() {
-      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-        browser
-          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+    var responsiveTest = function(containerToScroll) {
+      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
+        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+          browser
+            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+            .execute(function(container, run) {
+              if (container) {
+                var elem = document.querySelector(container);
+                if (run === 0) {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('body').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
+                } else {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('body').offsetHeight / run);
+                  else
+                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+                }
+              }
+            }, [containerToScroll, a])
+            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+        }
       }
     }
 
@@ -65,13 +83,13 @@ module.exports = {
     browser // the first tx should be of receive category and in process
       .waitForElementVisible('.transactions-list-repeater .item:first-child')
       .verify.cssClassPresent('.transactions-list-repeater .item:first-child', 'process')
-      .verify.cssClassPresent('.transactions-list-repeater .item:first-child div:nth-child(3)', 'progress-status')
+      .verify.cssClassPresent('.transactions-list-repeater .item:first-child .text-vertical-center div:nth-child(2)', 'progress-status')
       .verify.containsText('.transactions-list-repeater .item:first-child .status', 'In Process')
       .verify.containsText('.transactions-list-repeater .item:first-child .amount .value', getTx().amount)
       .verify.containsText('.transactions-list-repeater .item:first-child .amount .coin-name', coin.toUpperCase())
       .verify.containsText('.transactions-list-repeater .item:first-child .hash', getTx().address)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('window')
       })
   }
 };

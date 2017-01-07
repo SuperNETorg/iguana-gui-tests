@@ -27,12 +27,30 @@ module.exports = {
         }
     })('dashboard-send-coin-sys-fields');
 
-    var responsiveTest = function() {
-      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-        browser
-          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+    var responsiveTest = function(containerToScroll) {
+      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
+        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+          browser
+            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+            .execute(function(container, run) {
+              if (container) {
+                var elem = document.querySelector(container);
+                if (run === 0) {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('body').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
+                } else {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('body').offsetHeight / run);
+                  else
+                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+                }
+              }
+            }, [containerToScroll, a])
+            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+        }
       }
     }
 
@@ -65,12 +83,15 @@ module.exports = {
     browser
       .pause(1000)
       // address
+      .clearValue('.modal-send-coin .tx-address')
       .setValue('.modal-send-coin .tx-address', getAddress().trim() + '1234567890')
       .click('.modal-send-coin .btn-next')
       .verify.containsText('.modal-send-coin .tx-address-validation', 'Incorrect address. Please, make sure you enter it right.')
       .verify.cssClassPresent('.modal-send-coin .tx-address-validation', 'col-red')
       .verify.cssClassPresent('.modal-send-coin .tx-address', 'validation-field-error')
       // amount
+      .clearValue('.modal-send-coin .tx-amount')
+      .clearValue('.modal-send-coin .tx-amount-currency')
       .setValue('.modal-send-coin .tx-amount', (Number(getBalance().toFixed(2)) + 100))
       .click('.modal-send-coin .btn-next')
       .verify.containsText('.modal-send-coin .tx-amount-validation span', 'Not enough money. Max. ' + getBalance().toFixed(0) + ' ' + coin.toUpperCase())
@@ -84,6 +105,8 @@ module.exports = {
       .setValue('.modal-send-coin .tx-amount-currency', ((Number(getBalance() + 100) * usdCurrencyRate().SYS.USD).toFixed(2)))
       .click('.modal-send-coin .btn-next')
       // fee
+      .clearValue('.modal-send-coin .tx-fee')
+      .clearValue('.modal-send-coin .tx-fee-currency')
       .setValue('.modal-send-coin .tx-fee', (Number(getBalance().toFixed(2)) + 100))
       .click('.modal-send-coin .btn-next')
       .verify.containsText('.modal-send-coin .tx-amount-validation span', 'Not enough money. Max. ' + getBalance().toFixed(0) + ' ' + coin.toUpperCase())
@@ -113,55 +136,55 @@ module.exports = {
       .setValue('.modal-send-coin .tx-amount', ['100'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', Number(usdCurrencyRate().SYS.USD * 100).toFixed(2))
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['1000'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', Number(usdCurrencyRate().SYS.USD * 1000).toFixed(2))
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['0'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', '')
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['-100'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', 0)
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['abc'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', 0)
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['=$#;,'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-amount-currency', 0)
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['001'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-amount', 0.1)
       .clearValue('.modal-send-coin .tx-amount')
       .setValue('.modal-send-coin .tx-amount', ['10.01'])
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .pause(250)
       .verify.valueContains('.modal-send-coin .tx-amount', 10.01)
@@ -170,14 +193,14 @@ module.exports = {
       .setValue('.modal-send-coin .tx-fee', ['100'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', Number(usdCurrencyRate().SYS.USD * 100).toFixed(2))
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['1000'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', Number(usdCurrencyRate().SYS.USD * 1000).toFixed(2))
       .clearValue('.modal-send-coin .tx-fee')
@@ -191,34 +214,34 @@ module.exports = {
       .setValue('.modal-send-coin .tx-fee', ['-100'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', 0)
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['abc'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', 0)
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['=$#;,'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', 0)
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['001'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .verify.valueContains('.modal-send-coin .tx-fee', 0.1)
       .clearValue('.modal-send-coin .tx-fee')
       .setValue('.modal-send-coin .tx-fee', ['10.01'])
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('.send-coin-modal-container .modal-content')
       })
       .pause(250)
       .verify.valueContains('.modal-send-coin .tx-fee', 10.01)

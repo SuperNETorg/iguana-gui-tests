@@ -11,12 +11,30 @@ module.exports = {
         }
     })('change-currency');
 
-    var responsiveTest = function() {
-      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-        browser
-          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+    var responsiveTest = function(containerToScroll) {
+      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
+        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+          browser
+            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+            .execute(function(container, run) {
+              if (container) {
+                var elem = document.querySelector(container);
+                if (run === 0) {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('body').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
+                } else {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('body').offsetHeight / run);
+                  else
+                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+                }
+              }
+            }, [containerToScroll, a])
+            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+        }
       }
     }
 
@@ -25,13 +43,14 @@ module.exports = {
       .waitForElementVisible('.currency-content', 5000)
       .verify.title('Iguana / Settings')
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('window')
       })
       .click('.currency-loop .country-li:nth-child(2)') // select EUR
+      .pause(250)
       .verify.cssClassPresent('.currency-loop .country-li:nth-child(2)', 'active')
       .verify.containsText('.currency-loop .country-li:nth-child(2)', 'Euro')
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('window')
       })
       .url(conf.iguanaGuiURL + 'index.html#/dashboard')
       .waitForElementVisible('.dashboard')
