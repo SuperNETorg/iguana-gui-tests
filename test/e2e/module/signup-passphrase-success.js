@@ -23,6 +23,10 @@ module.exports = {
 
     browser
       .click('.btn-add-account')
+      .waitForElementVisible('.terms-conditionals-form')
+      .waitForElementVisible('.terms-conditionals-form .btn-terms-conditions-decline')
+      .waitForElementVisible('.terms-conditionals-form .btn-terms-conditions-accept')
+      .click('.terms-conditionals-form .btn-terms-conditions-accept')
       .waitForElementVisible('.iguana-modal')
       .verify.cssClassPresent('.iguana-modal', 'msg-green')
       .verify.containsText('.msg-body span', 'sys wallet is created. Login to access it.')
