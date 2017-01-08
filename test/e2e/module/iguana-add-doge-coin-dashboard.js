@@ -11,12 +11,30 @@ module.exports = {
         }
     })('iguana-login-add-wallet-doge-dashboard');
 
-    var responsiveTest = function() {
-      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-        browser
-          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+    var responsiveTest = function(containerToScroll) {
+      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
+        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+          browser
+            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+            .execute(function(container, run) {
+              if (container) {
+                var elem = document.querySelector(container);
+                if (run === 0) {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
+                } else {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight / run);
+                  else
+                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+                }
+              }
+            }, [containerToScroll, a])
+            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+        }
       }
     }
 
@@ -29,12 +47,12 @@ module.exports = {
           .pause(250)
           .waitForElementVisible('.add-new-coin-form-login-state')
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('.auth-add-coin-modal .modal-content')
           })
           .setValue('.quick-search input[type=text]', ['someunknowncoin'])
           .waitForElementNotPresent('.supported-coins-repeater-inner .coin', 500)
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('.auth-add-coin-modal .modal-content')
           })
           .clearValue('.quick-search input[type=text]')
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
@@ -49,7 +67,7 @@ module.exports = {
           .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state')
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('window')
           })
           .pause(250)
           .waitForElementVisible('.dashboard', 5000)
@@ -67,7 +85,7 @@ module.exports = {
               .setValue('.quick-search input[type=text]', ['syscoin'])
               .waitForElementNotPresent('.supported-coins-repeater-inner .coin.sys')
               .pause(10, function() {
-                responsiveTest()
+                responsiveTest('.auth-add-coin-modal .modal-content')
               })
               .clearValue('.quick-search input[type=text]')
               .setValue('.quick-search input[type=text]', ['dogecoin'])

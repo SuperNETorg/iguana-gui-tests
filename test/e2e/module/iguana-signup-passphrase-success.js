@@ -12,22 +12,47 @@ module.exports = {
         }
     })('iguana-signup-passphrase-success');
 
-    var responsiveTest = function() {
-      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-        browser
-          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+    var responsiveTest = function(containerToScroll) {
+      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
+        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+          browser
+            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+            .execute(function(container, run) {
+              if (container) {
+                var elem = document.querySelector(container);
+                if (run === 0) {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
+                } else {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('html').offsetHeight / run);
+                  else
+                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+                }
+              }
+            }, [containerToScroll, a])
+            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+        }
       }
     }
 
     browser
       .click('.btn-add-account')
+      .waitForElementVisible('.terms-conditionals-form')
+      .waitForElementVisible('.terms-conditionals-form .btn-terms-conditions-decline')
+      .waitForElementVisible('.terms-conditionals-form .btn-terms-conditions-accept')
+      .pause(10, function() {
+        responsiveTest('window')
+      })
+      .click('.terms-conditionals-form .btn-terms-conditions-accept')
       .waitForElementVisible('.iguana-modal')
       .verify.cssClassPresent('.iguana-modal', 'msg-green')
       .verify.containsText('.msg-body span', 'sys wallet is created. Login to access it.')
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('window')
       })
       .keys(browser.Keys.ESCAPE)
   }

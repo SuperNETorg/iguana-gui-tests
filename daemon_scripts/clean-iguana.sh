@@ -1,4 +1,4 @@
-if [ $3 != "skip" ]; then
+if [ "$3" = "" ]; then
   rm "./screenshots" -rf
 fi
 

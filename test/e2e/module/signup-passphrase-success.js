@@ -52,7 +52,7 @@ module.exports = {
       .verify.cssClassPresent('.iguana-modal', 'msg-green')
       .verify.containsText('.msg-body span', 'sys wallet is created. Login to access it.')
       .pause(10, function() {
-        responsiveTest()
+        responsiveTest('window')
       })
       .keys(browser.Keys.ESCAPE)
       .pause(5000, function() {
