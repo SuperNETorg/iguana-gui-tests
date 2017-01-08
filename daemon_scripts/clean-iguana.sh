@@ -1,4 +1,6 @@
-rm "./screenshots" -rf
+if [ $3 != "skip" ]; then
+  rm "./screenshots" -rf
+fi
 
 syscoin=/home/pbca/.syscoin/regtest
 dogecoin=/home/pbca/.dogecoin/regtest
