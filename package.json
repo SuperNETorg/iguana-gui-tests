@@ -20,7 +20,7 @@
     "coind-dashboard-check-sys-wallet": "./daemon_scripts/encrypt.sh coind dashboard-check-sys-wallet.js",
     "coind-dashboard-check-send-coin": "./daemon_scripts/encrypt.sh coind dashboard-check-send-coin.js",
     "coind-dashboard-check-send-coin-keying": "./daemon_scripts/encrypt.sh coind dashboard-check-send-coin-keying.js",
-    "coind-dashboard-check-receive-coin": "./daemon_scripts/encrypt.sh dashboard-check-receive-coin.js",
+    "coind-dashboard-check-receive-coin": "./daemon_scripts/encrypt.sh coind dashboard-check-receive-coin.js",
     "coind-dashboard-check-empty-nonempty-wallets": "./daemon_scripts/encrypt2.sh dashboard-check-empty-nonempty-wallets.js",
     "coind-dashboard-check-2-nonempty-wallets": "./daemon_scripts/encrypt2.sh dashboard-check-2-nonempty-wallets.js",
     "clean-iguana": "./daemon_scripts/clean-iguana.sh",
