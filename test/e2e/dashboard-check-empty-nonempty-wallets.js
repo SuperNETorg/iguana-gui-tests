@@ -14,6 +14,6 @@ module.exports = ext.extend(module.exports, require('./module/login-page-check')
 module.exports = ext.extend(module.exports, require('./module/add-wallet'));
 module.exports = ext.extend(module.exports, require('./module/signin-dashboard'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-empty-sys-wallet'));
-module.exports = ext.extend(module.exports, require('./module/add-wallet-doge-dashboard'));
+module.exports = ext.extend(module.exports, require('./module/add-wallet-doge-dashboard-coind'));
 module.exports = ext.extend(module.exports, require('./module/dogecoin-gen-coins'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-nonempty-doge-wallet'));

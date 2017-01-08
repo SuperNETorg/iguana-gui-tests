@@ -1,7 +1,5 @@
-if [ "$3" != "" ]; then
-  if [ "$3" = "skip" ]; then
-    rm "./screenshots" -rf
-  fi
+if [ "$3" = "" ]; then
+  rm "./screenshots" -rf
 fi
 
 syscoin=/home/pbca/.syscoin/regtest
