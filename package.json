@@ -17,6 +17,7 @@
     "coind-signin-change-currency": "./daemon_scripts/encrypt.sh coind signin-change-currency.js",
     "coind-signin-add-2nd-wallet": "./daemon_scripts/encrypt2.sh coind signin-add-2nd-wallet.js",
     "coind-dashboard-empty-wallet": "./daemon_scripts/encrypt.sh coind dashboard-empty-wallet.js",
+    "coind-dashboard-check-mobile-mode": "./daemon_scripts/encrypt.sh coind dashboard-check-mobile-mode.js",
     "coind-dashboard-check-sys-wallet": "./daemon_scripts/encrypt.sh coind dashboard-check-sys-wallet.js",
     "coind-dashboard-check-send-coin": "./daemon_scripts/encrypt.sh coind dashboard-check-send-coin.js",
     "coind-dashboard-check-send-coin-keying": "./daemon_scripts/encrypt.sh coind dashboard-check-send-coin-keying.js",
