@@ -11,29 +11,47 @@ module.exports = {
         }
     })('iguana-login-add-wallet-modal');
 
-    var responsiveTest = function() {
-      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-        browser
-          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+    var responsiveTest = function(containerToScroll) {
+      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
+        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+          browser
+            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+            .execute(function(container, run) {
+              if (container) {
+                var elem = document.querySelector(container);
+                if (run === 0) {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('body').offsetHeight * -1);
+                  else
+                    elem.scrollTop = 0;
+                } else {
+                  if (container === 'window')
+                    window.scrollBy(0, document.querySelector('body').offsetHeight / run);
+                  else
+                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+                }
+              }
+            }, [containerToScroll, a])
+            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+        }
       }
     }
 
     browser
       .pause(3000)
-      .moveToElement('.login-add-coin-selection-title', 2, 2, function() {
+      .moveToElement('.btn.row.btn-signin', 2, 2, function() {
         console.log('this should open add coin modal')
         browser
           .mouseButtonClick('left')
           .pause(250)
           .waitForElementVisible('.add-new-coin-form-login-state')
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('.auth-add-coin-modal .modal-content')
           })
           .setValue('.quick-search input[type=text]', ['komodo'])
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('.auth-add-coin-modal .modal-content')
           })
           .verify.cssClassPresent('.btn-next', 'disabled')
           .click('.supported-coins-repeater-inner .coin.kmd')
@@ -46,7 +64,7 @@ module.exports = {
           .click('.supported-coins-repeater-inner .coin.btm')
           .verify.cssClassPresent('.supported-coins-repeater-inner .coin.btm', 'active')
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('.auth-add-coin-modal .modal-content')
           })
           .clearValue('.quick-search input[type=text]')
           .verify.visible('.supported-coins-repeater-inner .coin.btm')
@@ -57,12 +75,12 @@ module.exports = {
           .verify.cssClassNotPresent('.btn-next', 'disabled')
           .verify.cssClassPresent('.supported-coins-repeater-inner .coin.sys', 'active')
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('.auth-add-coin-modal .modal-content')
           })
           .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
           .pause(10, function() {
-            responsiveTest()
+            responsiveTest('.auth-add-coin-modal .modal-content')
           })
           .pause(500)
           .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(1) div:first-child', 'Komodo')
