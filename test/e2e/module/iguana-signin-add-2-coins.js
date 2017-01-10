@@ -43,8 +43,6 @@ module.exports = {
       .moveToElement('.btn.row.btn-signin', 2, 2, function() {
         console.log('this should open add coin modal')
         browser
-          .mouseButtonClick('left')
-          .pause(250)
           .waitForElementVisible('.add-new-coin-form-login-state')
           .saveScreenshot(getScreenshotUrl())
           .setValue('.quick-search input[type=text]', ['syscoin'])

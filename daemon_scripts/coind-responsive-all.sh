@@ -1,3 +1,5 @@
+pkill iguana
+
 rm "./screenshots" -rf
 
 Xvfb :99 &

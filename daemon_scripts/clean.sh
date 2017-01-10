@@ -1,3 +1,5 @@
+pkill iguana
+
 if [ "$3" = "" ]; then
   rm "./screenshots" -rf
 fi
