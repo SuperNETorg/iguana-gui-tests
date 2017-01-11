@@ -6,8 +6,8 @@ var ext = require('../../nightwatch.conf.js');
  */
 
 // tests
-module.exports = ext.extend(module.exports, require("./module/login-page-check"));
-module.exports = ext.extend(module.exports, require("./module/add-wallet-signup"));
-module.exports = ext.extend(module.exports, require("./module/iguana-signup-page-check"));
-module.exports = ext.extend(module.exports, require("./module/signup-passphrase"));
-module.exports = ext.extend(module.exports, require("./module/iguana-signup-passphrase-success"));
+module.exports = ext.extend(module.exports, require('./module/login-page-check'));
+module.exports = ext.extend(module.exports, require('./module/add-wallet-signup'));
+module.exports = ext.extend(module.exports, require('./module/iguana-signup-page-check'));
+module.exports = ext.extend(module.exports, require('./module/signup-passphrase'));
+module.exports = ext.extend(module.exports, require('./module/iguana-signup-passphrase-success'));

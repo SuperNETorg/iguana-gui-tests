@@ -1,16 +1,15 @@
 var conf = require('../../../nightwatch.conf.js');
 
 module.exports = {
-  'test IguanaGUI login page check': function(browser) {
+  'test IguanaGUI execute add a wallet (iguana)': function(browser) {
     var getScreenshotUrl = (function(name) {
         var counter = -1;
 
-        return function() {
+        return function () {
           counter += 1;
           return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
         }
-    })('login-check');
-
+    })('login-add-wallet-sys-iguana');
     var responsiveTest = function(containerToScroll) {
       for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
         for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
@@ -39,15 +38,37 @@ module.exports = {
     }
 
     browser
-      .url(conf.iguanaGuiURL + 'index.html#/login')
-      .pause(250)
-      .url(conf.iguanaGuiURL + 'index.html#/login')
-      .waitForElementVisible('body')
-      .verify.title('Iguana / Login')
-      .waitForElementVisible('.btn-signin')
-      .waitForElementVisible('.btn-signup')
-      .pause(10, function() {
-        responsiveTest('window')
+      .pause(3000)
+      .moveToElement('.btn.row.btn-signin', 2, 2, function() {
+        console.log('this should open add coin modal')
+        browser
+          .mouseButtonClick('left')
+          .pause(250)
+          .waitForElementVisible('.add-new-coin-form-login-state')
+          .pause(1000)
+          .pause(10, function() {
+            responsiveTest('.auth-add-coin-modal .modal-content')
+          })
+          .setValue('.quick-search input[type=text]', ['someunknowncoin'])
+          .waitForElementNotPresent('.supported-coins-repeater-inner .coin', 500)
+          .clearValue('.quick-search input[type=text]')
+          .verify.visible('.supported-coins-repeater-inner .coin.sys')
+          .getAttribute('.btn-signin-account', 'disabled', function(result) {
+            console.log('button next should be disabled')
+            this.verify.equal(result.value, 'true')
+          })
+          .setValue('.quick-search input[type=text]', ['syscoin'])
+          .pause(500)
+          .getAttribute('.btn-signin-account', 'disabled', function(result) {
+            console.log('button next should be disabled')
+            this.verify.equal(result.value, 'true')
+          })
+          .verify.visible('.supported-coins-repeater-inner .coin.sys')
+          .click('.supported-coins-repeater-inner .coin.sys')
+          .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
+          .pause(10, function() {
+            responsiveTest('window')
+          })
       })
   }
 };

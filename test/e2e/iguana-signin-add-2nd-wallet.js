@@ -7,5 +7,5 @@ var ext = require('../../nightwatch.conf.js');
  */
 
 // tests
-module.exports = ext.extend(module.exports, require("./iguana-signin"));
+module.exports = ext.extend(module.exports, require('./iguana-signin'));
 module.exports = ext.extend(module.exports, require("./module/iguana-add-doge-coin-dashboard"));

@@ -42,6 +42,7 @@ module.exports = {
     }
 
     browser
+      .pause(2000)
       .waitForElementVisible('.create-account-form')
       .verify.title('Iguana / Create account')
       .verify.cssClassPresent('#passphrase-saved-checkbox', 'ng-empty')

@@ -11,7 +11,7 @@ var ext = require('../../nightwatch.conf.js');
  */
 
 // tests
-module.exports = ext.extend(module.exports, require("./module/get-coin-to-currency-rate"));
+module.exports = ext.extend(module.exports, require('./module/get-coin-to-currency-rate'));
 module.exports = ext.extend(module.exports, require('./module/login-page-check'));
 module.exports = ext.extend(module.exports, require('./module/add-wallet'));
 module.exports = ext.extend(module.exports, require('./module/signin-dashboard'));
