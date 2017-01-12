@@ -20,6 +20,5 @@ module.exports = {
       .verify.cssClassPresent('.transactions-unit .action-buttons .btn-send', 'disabled')
       .waitForElementVisible('.transactions-unit .top-bar .loader')
       .waitForElementVisible('.transactions-unit .transactions-list .loader')
-
   }
 };

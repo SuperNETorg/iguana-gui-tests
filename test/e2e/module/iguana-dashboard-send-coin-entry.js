@@ -2,7 +2,8 @@ var conf = require('../../../nightwatch.conf.js'),
     fs = require('fs'),
     currency = 'usd',
     coin = 'sys',
-    coinFullName = 'Syscoin';
+    coinFullName = 'Syscoin',
+    testName = 'iguana-dashboard-send-coin-sys';
 
 function getAddress() {
   return fs.readFileSync('temp/accountaddress-sys.txt', 'utf-8');
@@ -18,23 +19,6 @@ function getBalance() {
 
 module.exports = {
   'test IguanaGUI dashboard send coin modal': function(browser) {
-    var getScreenshotUrl = (function(name) {
-        var counter = -1;
-
-        return function () {
-          counter += 1;
-          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
-        }
-    })('iguana-dashboard-send-coin-sys');
-
-    var responsiveTest = function() {
-      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-        browser
-          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
-      }
-    }
 
     browser
       .pause(1000)
@@ -45,7 +29,7 @@ module.exports = {
       .setValue('.modal-send-coin .tx-fee', 1)
       .setValue('.modal-send-coin .tx-note', 'iguana test suite automated send coin')
       .pause(10, function() {
-        responsiveTest()
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
       })
       .pause(250)
       .click('.modal-send-coin .btn-next')
@@ -58,7 +42,7 @@ module.exports = {
       .verify.containsText('.modal-send-coin .btn-confirm-tx', 'Send ' + 10 + ' ' + coin.toUpperCase())
       .verify.containsText('.modal-send-coin .pop-detail.pay-dtl p', 'iguana test suite automated send coin')
       .pause(10, function() {
-        responsiveTest()
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
       })
       .click('.modal-send-coin .btn-confirm-tx')
       // regtest responds with an error on sendtoaddress

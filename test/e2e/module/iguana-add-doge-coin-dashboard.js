@@ -1,42 +1,8 @@
-var conf = require('../../../nightwatch.conf.js');
+var conf = require('../../../nightwatch.conf.js'),
+    testName = 'iguana-login-add-wallet-doge-dashboard';
 
 module.exports = {
   'test IguanaGUI execute add doge wallet on dashboard page (iguana)': function(browser) {
-    var getScreenshotUrl = (function(name) {
-        var counter = -1;
-
-        return function () {
-          counter += 1;
-          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
-        }
-    })('iguana-login-add-wallet-doge-dashboard');
-
-    var responsiveTest = function(containerToScroll) {
-      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
-        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-          browser
-            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-            .execute(function(container, run) {
-              if (container) {
-                var elem = document.querySelector(container);
-                if (run === 0) {
-                  if (container === 'window')
-                    window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
-                  else
-                    elem.scrollTop = 0;
-                } else {
-                  if (container === 'window')
-                    window.scrollBy(0, document.querySelector('html').offsetHeight / run);
-                  else
-                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
-                }
-              }
-            }, [containerToScroll, a])
-            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
-        }
-      }
-    }
 
     browser
       .pause(500)
@@ -47,12 +13,12 @@ module.exports = {
           .pause(250)
           .waitForElementVisible('.add-new-coin-form-login-state')
           .pause(10, function() {
-            responsiveTest('.auth-add-coin-modal .modal-content')
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
           })
           .setValue('.quick-search input[type=text]', ['someunknowncoin'])
           .waitForElementNotPresent('.supported-coins-repeater-inner .coin', 500)
           .pause(10, function() {
-            responsiveTest('.auth-add-coin-modal .modal-content')
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
           })
           .clearValue('.quick-search input[type=text]')
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
@@ -67,12 +33,12 @@ module.exports = {
           .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state')
           .pause(10, function() {
-            responsiveTest('window')
+            conf.responsiveTest('window', testName, browser)
           })
           .pause(250)
           .waitForElementVisible('.dashboard', 5000)
           .pause(10, function() {
-            responsiveTest()
+            conf.responsiveTest('window', testName, browser)
           })
           // verify that 2 coins are present in the dashboard
           .verify.containsText('.account-coins-repeater .sys .coin-value .val', 0)

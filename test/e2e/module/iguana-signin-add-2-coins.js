@@ -1,42 +1,8 @@
-var conf = require('../../../nightwatch.conf.js');
+var conf = require('../../../nightwatch.conf.js'),
+    testName = 'iguana-login-add-2-coins';
 
 module.exports = {
   'test IguanaGUI add 2 coins on login (iguana)': function(browser) {
-    var getScreenshotUrl = (function(name) {
-        var counter = -1;
-
-        return function () {
-          counter += 1;
-          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
-        }
-    })('iguana-login-add-2-coins');
-
-    var responsiveTest = function(containerToScroll) {
-      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
-        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-          browser
-            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-            .execute(function(container, run) {
-              if (container) {
-                var elem = document.querySelector(container);
-                if (run === 0) {
-                  if (container === 'window')
-                    window.scrollBy(0, document.querySelector('body').offsetHeight * -1);
-                  else
-                    elem.scrollTop = 0;
-                } else {
-                  if (container === 'window')
-                    window.scrollBy(0, document.querySelector('body').offsetHeight / run);
-                  else
-                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
-                }
-              }
-            }, [containerToScroll, a])
-            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
-        }
-      }
-    }
 
     browser
       .pause(3000)
@@ -47,7 +13,7 @@ module.exports = {
           .saveScreenshot(getScreenshotUrl())
           .setValue('.quick-search input[type=text]', ['syscoin'])
           .pause(10, function() {
-            responsiveTest('.auth-add-coin-modal .modal-content')
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
           })
           .verify.cssClassPresent('.btn-next', 'disabled')
           .click('.supported-coins-repeater-inner .coin.sys')
@@ -60,12 +26,12 @@ module.exports = {
           .click('.supported-coins-repeater-inner .coin.doge')
           .verify.cssClassPresent('.supported-coins-repeater-inner .coin.doge', 'active')
           .pause(10, function() {
-            responsiveTest('.auth-add-coin-modal .modal-content')
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
           })
           .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
           .pause(10, function() {
-            responsiveTest('.auth-add-coin-modal .modal-content')
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
           })
           .pause(500)
           .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(1) div:first-child', 'Syscoin')

@@ -2,7 +2,8 @@ var conf = require('../../../nightwatch.conf.js'),
     fs = require('fs'),
     currency = 'usd',
     coin = 'sys',
-    coinFullName = 'Syscoin';
+    coinFullName = 'Syscoin',
+    testName = 'dashboard-send-coin-sys';
 
 function getAddress() {
   return fs.readFileSync('temp/accountaddress-sys.txt', 'utf-8');
@@ -18,41 +19,6 @@ function getBalance() {
 
 module.exports = {
   'test IguanaGUI dashboard send coin modal': function(browser) {
-    var getScreenshotUrl = (function(name) {
-        var counter = -1;
-
-        return function () {
-          counter += 1;
-          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
-        }
-    })('dashboard-send-coin-sys');
-
-    var responsiveTest = function(containerToScroll) {
-      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
-        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-          browser
-            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-            .execute(function(container, run) {
-              if (container) {
-                var elem = document.querySelector(container);
-                if (run === 0) {
-                  if (container === 'window')
-                    window.scrollBy(0, document.querySelector('body').offsetHeight * -1);
-                  else
-                    elem.scrollTop = 0;
-                } else {
-                  if (container === 'window')
-                    window.scrollBy(0, document.querySelector('body').offsetHeight / run);
-                  else
-                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
-                }
-              }
-            }, [containerToScroll, a])
-            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
-        }
-      }
-    }
 
     browser
       .pause(1000)
@@ -70,8 +36,7 @@ module.exports = {
       .setValue('.modal-send-coin .tx-fee', 1)
       .setValue('.modal-send-coin .tx-note', 'iguana test suite automated send coin')
       .pause(10, function() {
-        console.log(getAddress().trim())
-        responsiveTest('.send-coin-modal-container .modal-content')
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
       })
       .pause(250)
       .click('.modal-send-coin .btn-next')
@@ -84,7 +49,7 @@ module.exports = {
       .verify.containsText('.modal-send-coin .btn-confirm-tx', 'Send ' + 10 + ' ' + coin.toUpperCase())
       .verify.containsText('.modal-send-coin .pop-detail.pay-dtl p', 'iguana test suite automated send coin')
       .pause(10, function() {
-        responsiveTest('.send-coin-modal-container .modal-content')
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
       })
       .click('.modal-send-coin .btn-confirm-tx')
       .waitForElementVisible('.send-coin-confirm-passphrase .form-header .title')
@@ -97,7 +62,7 @@ module.exports = {
       .verify.cssClassPresent('.iguana-modal', 'msg-red')
       .verify.containsText('.msg-body span', 'Incorrect input. Check it try one more time')
       .pause(10, function() {
-        responsiveTest('.send-coin-modal-container .modal-content')
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
       })
       .keys(browser.Keys.ESCAPE)
       .pause(2000)
@@ -107,7 +72,7 @@ module.exports = {
       .clearValue('.send-coin-confirm-passphrase #passphrase')
       .setValue('.send-coin-confirm-passphrase #passphrase', 'test test')
       .pause(10, function() {
-        responsiveTest('.send-coin-passphrase-modal-container .modal-content')
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
       })
       .click('.send-coin-confirm-passphrase .btn-add-wallet')
       .waitForElementNotPresent('.send-coin-confirm-passphrase')

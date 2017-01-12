@@ -4,7 +4,8 @@ var conf = require('../../../nightwatch.conf.js'),
     coin = 'sys',
     coinFullName = 'Syscoin',
     txData,
-    defaultAddress;
+    defaultAddress,
+    testName = 'dashboard-check-nonempty-sys-wallet';
 
 function getTx() {
   return JSON.parse(fs.readFileSync('temp/listtransactions-sys.txt', 'utf-8'))[0]; // tx are in default order while in ui they're in reverse
@@ -25,41 +26,6 @@ function getBalance() {
 
 module.exports = {
   'test IguanaGUI dashboard w/ non-empty sys wallet': function(browser) {
-    var getScreenshotUrl = (function(name) {
-        var counter = -1;
-
-        return function () {
-          counter += 1;
-          return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + counter + '-{{ res }}-' + '.png';
-        }
-    })('dashboard-check-nonempty-sys-wallet');
-
-    var responsiveTest = function(containerToScroll) {
-      for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
-        for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-          var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
-          browser
-            .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-            .execute(function(container, run) {
-              if (container) {
-                var elem = document.querySelector(container);
-                if (run === 0) {
-                  if (container === 'window')
-                    window.scrollBy(0, document.querySelector('body').offsetHeight * -1);
-                  else
-                    elem.scrollTop = 0;
-                } else {
-                  if (container === 'window')
-                    window.scrollBy(0, document.querySelector('body').offsetHeight / run);
-                  else
-                    elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
-                }
-              }
-            }, [containerToScroll, a])
-            .saveScreenshot(getScreenshotUrl().replace('{{ res }}', '-scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
-        }
-      }
-    }
 
     browser
       .verify.containsText('.balance-block .currency', currency.toUpperCase())
@@ -89,7 +55,7 @@ module.exports = {
       .verify.containsText('.transactions-list-repeater .item:first-child .amount .coin-name', coin.toUpperCase())
       .verify.containsText('.transactions-list-repeater .item:first-child .hash', getTx().address)
       .pause(10, function() {
-        responsiveTest('window')
+        conf.responsiveTest('window', testName, browser)
       })
   }
 };
