@@ -11,6 +11,7 @@ module.exports = {
       .pause(10, function() {
         conf.responsiveTest('window', testName, browser)
       })
+      .pause(10000)
       .click('.currency-loop .country-li:nth-child(2)') // select EUR
       .pause(250)
       .verify.cssClassPresent('.currency-loop .country-li:nth-child(2)', 'active')
