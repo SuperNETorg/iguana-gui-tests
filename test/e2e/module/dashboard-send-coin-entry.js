@@ -60,7 +60,7 @@ module.exports = {
       .click('.send-coin-confirm-passphrase .btn-add-wallet')
       .waitForElementPresent('.iguana-modal')
       .verify.cssClassPresent('.iguana-modal', 'msg-red')
-      .verify.containsText('.msg-body span', 'Incorrect input. Check it try one more time')
+      .verify.containsText('.msg-body span', 'Invalid passphrase, please try again')
       .pause(10, function() {
         conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
       })
