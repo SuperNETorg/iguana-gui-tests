@@ -51,7 +51,7 @@ module.exports = {
               .setValue('.quick-search input[type=text]', ['syscoin'])
               .waitForElementNotPresent('.supported-coins-repeater-inner .coin.sys')
               .pause(10, function() {
-                responsiveTest('.auth-add-coin-modal .modal-content')
+                conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
               })
               .clearValue('.quick-search input[type=text]')
               .setValue('.quick-search input[type=text]', ['dogecoin'])
