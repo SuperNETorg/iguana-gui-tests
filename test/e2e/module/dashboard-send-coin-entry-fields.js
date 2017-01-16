@@ -87,7 +87,7 @@ module.exports = {
       .pause(250)
       .verify.containsText('.modal-send-coin .tx-fee-validation span', '0.00001 SYS is a min. required fee.')
       .click('.modal-send-coin .btn-next')
-      .pause(500)
+      .pause(1500)
       .verify.containsText('.modal-send-coin .tx-fee-validation span', 'Please enter a correct amount')
       .verify.cssClassPresent('.modal-send-coin .tx-fee', 'validation-field-error')
       .verify.cssClassPresent('.modal-send-coin .tx-fee-currency', 'validation-field-error')
@@ -182,7 +182,7 @@ module.exports = {
       .setValue('.modal-send-coin .tx-fee', ['1000'])
       .pause(250)
       .pause(10, function() {
-        responsiveTest('.send-coin-modal-container .modal-content')
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
       })
       .verify.valueContains('.modal-send-coin .tx-fee-currency', Number(usdCurrencyRate().SYS.USD * 1000).toFixed(2))
       .clearValue('.modal-send-coin .tx-fee')

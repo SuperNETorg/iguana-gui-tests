@@ -5,8 +5,6 @@ module.exports = {
 
     browser
       .url(conf.iguanaGuiURL + 'index.html#/login')
-      .pause(250)
-      .url(conf.iguanaGuiURL + 'index.html#/login')
       .waitForElementVisible('body')
       .verify.title('Iguana / Login')
       .waitForElementVisible('.btn-signin')
