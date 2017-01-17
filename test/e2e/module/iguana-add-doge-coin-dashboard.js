@@ -22,15 +22,17 @@ module.exports = {
           })
           .clearValue('.quick-search input[type=text]')
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
-          .verify.cssClassPresent('.btn-next', 'disabled')
+          //.verify.cssClassPresent('.btn-next', 'disabled')
           .setValue('.quick-search input[type=text]', ['dogecoin'])
           .pause(500)
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
           .click('.supported-coins-repeater-inner .coin.doge')
-          .verify.cssClassNotPresent('.btn-next', 'disabled')
+          /*.verify.cssClassNotPresent('.btn-next', 'disabled')
           .verify.cssClassPresent('.supported-coins-repeater-inner .coin.doge', 'active')
-          .saveScreenshot(getScreenshotUrl())
-          .click('.btn-next')
+          .pause(10, function() {
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
+          })
+          .click('.btn-next')*/
           .waitForElementNotPresent('.add-new-coin-form-login-state')
           .pause(10, function() {
             conf.responsiveTest('window', testName, browser)
@@ -56,6 +58,8 @@ module.exports = {
               .clearValue('.quick-search input[type=text]')
               .setValue('.quick-search input[type=text]', ['dogecoin'])
               .waitForElementNotPresent('.supported-coins-repeater-inner .coin.doge')
+              .keys(browser.Keys.ESCAPE)
+              .waitForElementNotPresent('.add-new-coin-form-login-state')
           })
       })
   }
