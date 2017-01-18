@@ -9,6 +9,7 @@ npm run clean coind_responsive signup-w-signin.js skip
 npm run clean coind_responsive signup-success.js skip
 npm run encrypt coind_responsive signup-error.js skip
 npm run encrypt coind_responsive signin-change-currency.js skip
+npm run encrypt coind dashboard-check-mobile-mode.js skip
 npm run encrypt2 coind_responsive signin-add-2nd-wallet.js skip
 npm run encrypt coind_responsive dashboard-empty-wallet.js skip
 npm run encrypt coind_responsive dashboard-check-sys-wallet.js skip
