@@ -10,3 +10,4 @@ var ext = require('../../nightwatch.conf.js');
 module.exports = ext.extend(module.exports, require('./signup-success'));
 module.exports = ext.extend(module.exports, require('./module/add-wallet-2nd-time'));
 module.exports = ext.extend(module.exports, require('./module/signup-signin-after-wallet-encrypt'));
+module.exports = ext.extend(module.exports, require('./module/close-browser.js'));

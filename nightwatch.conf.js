@@ -7,9 +7,9 @@
 
 require('env2')('.env'); // optionally store youre Evironment Variables in .env
 
-const PKG = require('./package.json'); // so we can get the version of the project
-const BINPATH = './node_modules/nightwatch/bin/'; // change if required.
-const SCREENSHOT_PATH = 'screenshots'
+const PKG = require('./package.json'), // so we can get the version of the project
+      BINPATH = './node_modules/nightwatch/bin/', // change if required.
+      SCREENSHOT_PATH = 'screenshots';
 
 /*
  *  extend tests
@@ -29,17 +29,19 @@ var extend = function(target) {
 
 var responsiveTest = function(containerToScroll, name, browser) {
   var getScreenshotUrl = function() {
-    return 'screenshots/' + browser.globals.test_settings.mode + '/' + name + '-' + Date.now() + '-{{ res }}-' + '.png';
+    return SCREENSHOT_PATH + '/' + browser.globals.test_settings.mode + '/' + name + '-' + Date.now() + '-{{ res }}-' + '.png';
   };
 
   for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
     for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-      var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ')
+      var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ');
+
       browser
         .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
         .execute(function(container, run) {
           if (container) {
             var elem = document.querySelector(container);
+
             if (run === 0) {
               if (container === 'window')
                 window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
@@ -85,6 +87,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
   'test_settings': {
     'coind_responsive': {
       'mode': 'coind',
+      'subMode': 'responsive',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [ // more viewports here http://viewportsizes.com/
         //'320 x 240',
@@ -132,6 +135,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'iguana_responsive': {
       'mode': 'iguana',
+      'subMode': 'responsive',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [ // more viewports here http://viewportsizes.com/
         //'320 x 240',
@@ -179,6 +183,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'coind': {
       'mode': 'coind',
+      'subMode': 'default',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [
         '1280 x 800' // screenshots are saved at this resolution
@@ -207,6 +212,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'iguana': {
       'mode': 'iguana',
+      'subMode': 'default',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [
         '1280 x 800' // screenshots are saved at this resolution
