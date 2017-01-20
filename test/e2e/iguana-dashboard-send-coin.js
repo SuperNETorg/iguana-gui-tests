@@ -11,3 +11,4 @@ module.exports = ext.extend(module.exports, require('./module/get-coin-to-curren
 module.exports = ext.extend(module.exports, require('./iguana-signin'));
 module.exports = ext.extend(module.exports, require('./module/syscoin-gen-coins'));
 module.exports = ext.extend(module.exports, require('./module/iguana-dashboard-send-coin-entry'));
+module.exports = ext.extend(module.exports, require('./module/close-browser.js'));

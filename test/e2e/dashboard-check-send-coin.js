@@ -15,3 +15,4 @@ module.exports = ext.extend(module.exports, require('./module/add-wallet'));
 module.exports = ext.extend(module.exports, require('./module/signin-dashboard'));
 module.exports = ext.extend(module.exports, require('./module/syscoin-gen-coins'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-send-coin-entry'));
+module.exports = ext.extend(module.exports, require('./module/close-browser.js'));

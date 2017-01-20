@@ -15,3 +15,4 @@ module.exports = ext.extend(module.exports, require('./module/signin-dashboard')
 module.exports = ext.extend(module.exports, require('./module/syscoin-gen-coins'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-mobile-mode'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-edex-tab-coind'));
+module.exports = ext.extend(module.exports, require('./module/close-browser.js'));

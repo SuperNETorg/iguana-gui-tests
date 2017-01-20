@@ -87,7 +87,6 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
   'test_settings': {
     'coind_responsive': {
       'mode': 'coind',
-      'subMode': 'responsive',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [ // more viewports here http://viewportsizes.com/
         //'320 x 240',
@@ -135,7 +134,6 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'iguana_responsive': {
       'mode': 'iguana',
-      'subMode': 'responsive',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [ // more viewports here http://viewportsizes.com/
         //'320 x 240',
@@ -183,7 +181,6 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'coind': {
       'mode': 'coind',
-      'subMode': 'default',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [
         '1280 x 800' // screenshots are saved at this resolution
@@ -212,7 +209,6 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'iguana': {
       'mode': 'iguana',
-      'subMode': 'default',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [
         '1280 x 800' // screenshots are saved at this resolution

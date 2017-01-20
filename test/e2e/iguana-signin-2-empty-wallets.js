@@ -10,3 +10,4 @@ module.exports = ext.extend(module.exports, require('./module/login-page-check')
 module.exports = ext.extend(module.exports, require('./module/iguana-signin-add-2-coins'));
 module.exports = ext.extend(module.exports, require('./module/iguana-signin-dashboard-2-coins'));
 module.exports = ext.extend(module.exports, require('./module/iguana-dashboard-check-empty-sys-wallet'));
+module.exports = ext.extend(module.exports, require('./module/close-browser.js'));

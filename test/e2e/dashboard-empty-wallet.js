@@ -12,3 +12,4 @@ module.exports = ext.extend(module.exports, require('./module/add-wallet'));
 module.exports = ext.extend(module.exports, require('./module/signin-dashboard'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-empty-sys-wallet'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-edex-tab-coind'));
+module.exports = ext.extend(module.exports, require('./module/close-browser.js'));

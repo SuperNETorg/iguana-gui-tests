@@ -20,3 +20,4 @@ module.exports = ext.extend(module.exports, require('./module/syscoin-gen-coins'
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-nonempty-sys-wallet'));
 module.exports = ext.extend(module.exports, require('./module/dogecoin-gen-coins'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-nonempty-doge-wallet'));
+module.exports = ext.extend(module.exports, require('./module/close-browser.js'));

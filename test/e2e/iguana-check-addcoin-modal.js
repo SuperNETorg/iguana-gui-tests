@@ -8,3 +8,4 @@ var ext = require('../../nightwatch.conf.js');
 // tests
 module.exports = ext.extend(module.exports, require('./module/login-page-check'));
 module.exports = ext.extend(module.exports, require('./module/iguana-check-addcoin-modal'));
+module.exports = ext.extend(module.exports, require('./module/close-browser.js'));

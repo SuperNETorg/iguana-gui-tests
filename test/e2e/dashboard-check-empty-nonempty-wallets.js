@@ -18,3 +18,4 @@ module.exports = ext.extend(module.exports, require('./module/add-wallet-doge-da
 module.exports = ext.extend(module.exports, require('./module/dogecoin-gen-coins'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-nonempty-doge-wallet'));
 module.exports = ext.extend(module.exports, require('./module/dashboard-check-edex-tab-coind'));
+module.exports = ext.extend(module.exports, require('./module/close-browser.js'));
