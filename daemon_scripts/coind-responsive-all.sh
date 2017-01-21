@@ -49,6 +49,7 @@ pkill java
 npm run encrypt2 coind_responsive dashboard-check-2-nonempty-wallets.js skip
 pkill chromedriver
 pkill java
+pkill Xvfb
 
 for i in `seq 1 4`;
 do

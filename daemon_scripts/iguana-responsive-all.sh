@@ -15,6 +15,7 @@ npm run clean-iguana iguana_responsive iguana-signin-2-empty-wallets.js skip
 pkill chromedriver
 pkill java
 npm run clean-iguana iguana_responsive iguana-signin-add-2nd-wallet.js skip
+pkill Xvfb
 
 for i in `seq 1 4`;
 do
