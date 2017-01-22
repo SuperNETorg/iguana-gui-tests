@@ -55,7 +55,7 @@ module.exports = {
       .verify.containsText('.transactions-list-repeater .item:first-child .amount .coin-name', coin.toUpperCase())
       .verify.containsText('.transactions-list-repeater .item:first-child .hash', getTx().address)
       .pause(10, function() {
-        conf.responsiveTest('window', testName, browser)
+        conf.responsiveTest('window', testName, browser, 0)
       })
   }
 };

@@ -38,7 +38,7 @@ module.exports = {
         this.verify.equal(result.value, null)
       })
       .pause(10, function() {
-        conf.responsiveTest('window', testName, browser)
+        conf.responsiveTest('window', testName, browser, 0)
       })
   }
 };

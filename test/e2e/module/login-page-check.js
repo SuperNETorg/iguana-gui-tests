@@ -10,7 +10,7 @@ module.exports = {
       .waitForElementVisible('.btn-signin')
       .waitForElementVisible('.btn-signup')
       .pause(10, function() {
-        conf.responsiveTest('window', 'login-page-check', browser)
+        conf.responsiveTest('window', 'login-page-check', browser, 0)
       })
       .pause(4000)
   }

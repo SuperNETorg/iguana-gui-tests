@@ -13,7 +13,7 @@ module.exports = {
       .click('.btn-verify-passphrase')
       .waitForElementVisible('.verify-passphrase-form')
       .pause(10, function() {
-        conf.responsiveTest('window', testName, browser)
+        conf.responsiveTest('window', testName, browser, 0, true)
       })
       .getAttribute('.btn-add-account', 'disabled', function(result) {
         console.log('button add account should be enabled')
@@ -27,7 +27,7 @@ module.exports = {
         this.verify.equal(result.value, null)
       })
       .pause(10, function() {
-        conf.responsiveTest('window', testName, browser)
+        conf.responsiveTest('window', testName, browser, 0, true)
       })
       .clearValue('#passphrase')
       .setValue('#passphrase', fs.readFileSync('temp/savedpassphrase.txt', 'utf-8'))
@@ -39,7 +39,7 @@ module.exports = {
         this.verify.equal(result.value, null)
       })
       .pause(10, function() {
-        conf.responsiveTest('window', testName, browser)
+        conf.responsiveTest('window', testName, browser, 0)
       })
   }
 };

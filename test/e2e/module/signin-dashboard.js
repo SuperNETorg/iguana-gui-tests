@@ -9,7 +9,7 @@ module.exports = {
       .setValue('#passphrase', ['test test'])
       .pause(250)
       .pause(10, function() {
-        conf.responsiveTest('window', testName, browser)
+        conf.responsiveTest('window', testName, browser, 0)
       })
       .getAttribute('.btn-signin-account', 'disabled', function(result) {
         console.log('singin button should be enabled')
@@ -19,12 +19,12 @@ module.exports = {
       .pause(250)
       .waitForElementVisible('.terms-conditionals-form')
       .pause(10, function() {
-        conf.responsiveTest('.terms-conditionals-form .directives-text', testName, browser)
+        conf.responsiveTest('.terms-conditionals-form .directives-text', testName, browser, 1)
       })
       .click('.terms-conditionals-form .btn-terms-conditions-accept')
       .waitForElementVisible('.dashboard', 5000)
       .pause(10, function() {
-        conf.responsiveTest('window', testName, browser)
+        conf.responsiveTest('window', testName, browser, 2)
       })
   }
 };

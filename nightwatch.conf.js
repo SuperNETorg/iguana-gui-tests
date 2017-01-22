@@ -27,37 +27,38 @@ var extend = function(target) {
   return target;
 };
 
-var responsiveTest = function(containerToScroll, name, browser) {
+var responsiveTest = function(containerToScroll, name, browser, counter, skip) {
   var getScreenshotUrl = function() {
-    return SCREENSHOT_PATH + '/' + browser.globals.test_settings.mode + '/' + name + '-' + Date.now() + '-{{ res }}-' + '.png';
+    return SCREENSHOT_PATH + '/' + browser.globals.test_settings.mode + '/' + name + '-' + counter /*+ '-' + Date.now()*/ + '-{{ res }}-' + '.png';
   };
 
-  for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
-    for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
-      var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ');
+  if ((skip && browser.globals.test_settings.sub !== 'responsive') || !skip)
+    for (var a=0; a < browser.globals.test_settings.scrollByPoinsCount; a++) {
+      for (var i=0; i < browser.globals.test_settings.responsiveBreakPoints.length; i++) {
+        var viewport = browser.globals.test_settings.responsiveBreakPoints[i].split(' x ');
 
-      browser
-        .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
-        .execute(function(container, run) {
-          if (container) {
-            var elem = document.querySelector(container);
+        browser
+          .resizeWindow(Number(viewport[0]) + 10, Number(viewport[1]) + 80)
+          .execute(function(container, run) {
+            if (container) {
+              var elem = document.querySelector(container);
 
-            if (run === 0) {
-              if (container === 'window')
-                window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
-              else
-                elem.scrollTop = 0;
-            } else {
-              if (container === 'window')
-                window.scrollBy(0, document.querySelector('html').offsetHeight / run);
-              else
-                elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+              if (run === 0) {
+                if (container === 'window')
+                  window.scrollBy(0, document.querySelector('html').offsetHeight * -1);
+                else
+                  elem.scrollTop = 0;
+              } else {
+                if (container === 'window')
+                  window.scrollBy(0, document.querySelector('html').offsetHeight / run);
+                else
+                  elem.scrollTop = Math.floor(document.querySelector(container).offsetHeight / run);
+              }
             }
-          }
-        }, [containerToScroll, a])
-        .saveScreenshot(getScreenshotUrl().replace('{{ res }}', 'scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+          }, [containerToScroll, a])
+          .saveScreenshot(getScreenshotUrl().replace('{{ res }}', 'scroll-' + a + '-' + browser.globals.test_settings.responsiveBreakPoints[i].replace(' x ', 'x')))
+      }
     }
-  }
 }
 
 const config = { // we use a nightwatch.conf.js file so we can include comments and helper functions
@@ -87,6 +88,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
   'test_settings': {
     'coind_responsive': {
       'mode': 'coind',
+      'sub': 'responsive',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [ // more viewports here http://viewportsizes.com/
         //'320 x 240',
@@ -134,6 +136,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'iguana_responsive': {
       'mode': 'iguana',
+      'sub': 'responsive',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [ // more viewports here http://viewportsizes.com/
         //'320 x 240',
@@ -181,6 +184,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'coind': {
       'mode': 'coind',
+      'sub': 'default',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [
         '1280 x 800' // screenshots are saved at this resolution
@@ -209,6 +213,7 @@ const config = { // we use a nightwatch.conf.js file so we can include comments 
     },
     'iguana': {
       'mode': 'iguana',
+      'sub': 'default',
       'scrollByPoinsCount': 3,
       'responsiveBreakPoints': [
         '1280 x 800' // screenshots are saved at this resolution

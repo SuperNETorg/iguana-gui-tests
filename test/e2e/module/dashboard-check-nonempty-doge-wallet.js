@@ -61,7 +61,7 @@ module.exports = {
       .pause('3000')
       .verify.cssClassPresent('.coins .btn-add-coin', 'disabled')
       .pause(10, function() {
-        conf.responsiveTest('window', testName, browser)
+        conf.responsiveTest('window', testName, browser, 0, true)
       })
   }
 };

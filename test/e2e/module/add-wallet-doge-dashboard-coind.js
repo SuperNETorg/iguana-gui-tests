@@ -14,12 +14,12 @@ module.exports = {
           .pause(250)
           .waitForElementVisible('.add-new-coin-form-login-state')
           .pause(10, function() {
-            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser, 0, true)
           })
           .setValue('.quick-search input[type=text]', ['someunknowncoin'])
           .waitForElementNotPresent('.supported-coins-repeater-inner .coin', 500)
           .pause(10, function() {
-            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser, 0, true)
           })
           .clearValue('.quick-search input[type=text]')
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
@@ -27,7 +27,7 @@ module.exports = {
           .pause(500)
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
           .pause(10, function() {
-            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser, 0, true)
           })
           .click('.supported-coins-repeater-inner .coin.doge')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
@@ -36,7 +36,7 @@ module.exports = {
           .setValue('#passphrase', ['test test'])
           .pause(250)
           .pause(10, function() {
-            conf.responsiveTest('window', testName, browser)
+            conf.responsiveTest('window', testName, browser, 0, true)
           })
           .getAttribute('.btn-signin-account', 'disabled', function(result) {
             console.log('singin button should be enabled')
@@ -46,7 +46,7 @@ module.exports = {
           .pause(250)
           .waitForElementVisible('.dashboard', 5000)
           .pause(10, function() {
-            conf.responsiveTest('window', testName, browser)
+            conf.responsiveTest('window', testName, browser, 0, true)
           })
       })
   }

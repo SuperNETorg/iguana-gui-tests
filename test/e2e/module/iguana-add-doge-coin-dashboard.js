@@ -13,12 +13,12 @@ module.exports = {
           .pause(250)
           .waitForElementVisible('.add-new-coin-form-login-state')
           .pause(10, function() {
-            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser, 0, true)
           })
           .setValue('.quick-search input[type=text]', ['someunknowncoin'])
           .waitForElementNotPresent('.supported-coins-repeater-inner .coin', 500)
           .pause(10, function() {
-            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser, 0, true)
           })
           .clearValue('.quick-search input[type=text]')
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
@@ -35,12 +35,12 @@ module.exports = {
           .click('.btn-next')*/
           .waitForElementNotPresent('.add-new-coin-form-login-state')
           .pause(10, function() {
-            conf.responsiveTest('window', testName, browser)
+            conf.responsiveTest('window', testName, browser, 0, true)
           })
           .pause(250)
           .waitForElementVisible('.dashboard', 5000)
           .pause(10, function() {
-            conf.responsiveTest('window', testName, browser)
+            conf.responsiveTest('window', testName, browser, 0, true)
           })
           // verify that 2 coins are present in the dashboard
           .verify.containsText('.account-coins-repeater .sys .coin-value .val', 0)

@@ -36,7 +36,7 @@ module.exports = {
       .setValue('.modal-send-coin .tx-fee', 1)
       .setValue('.modal-send-coin .tx-note', 'iguana test suite automated send coin')
       .pause(10, function() {
-        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser, 0, true)
       })
       .pause(250)
       .click('.modal-send-coin .btn-next')
@@ -49,7 +49,7 @@ module.exports = {
       .verify.containsText('.modal-send-coin .btn-confirm-tx', 'Send ' + 10 + ' ' + coin.toUpperCase())
       .verify.containsText('.modal-send-coin .pop-detail.pay-dtl p', 'iguana test suite automated send coin')
       .pause(10, function() {
-        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser, 0)
       })
       .click('.modal-send-coin .btn-confirm-tx')
       .waitForElementVisible('.send-coin-confirm-passphrase .form-header .title')
@@ -62,7 +62,7 @@ module.exports = {
       .verify.cssClassPresent('.iguana-modal', 'msg-red')
       .verify.containsText('.msg-body span', 'Invalid passphrase, please try again')
       .pause(10, function() {
-        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser, 1)
       })
       .keys(browser.Keys.ESCAPE)
       .pause(2000)
@@ -72,7 +72,7 @@ module.exports = {
       .clearValue('.send-coin-confirm-passphrase #passphrase')
       .setValue('.send-coin-confirm-passphrase #passphrase', 'test test')
       .pause(10, function() {
-        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser)
+        conf.responsiveTest('.send-coin-modal-container .modal-content', testName, browser, 2)
       })
       .click('.send-coin-confirm-passphrase .btn-add-wallet')
       .waitForElementNotPresent('.send-coin-confirm-passphrase')

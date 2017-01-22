@@ -19,7 +19,7 @@ module.exports = {
           .waitForElementVisible('.add-new-coin-form-login-state')
           .pause(1000)
           .pause(10, function() {
-            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
+            conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser, 0, true)
           })
           .setValue('.quick-search input[type=text]', ['someunknowncoin'])
           .waitForElementNotPresent('.supported-coins-repeater-inner .coin', 500)
@@ -39,7 +39,7 @@ module.exports = {
           .click('.supported-coins-repeater-inner .coin.sys')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
           .pause(10, function() {
-            conf.responsiveTest('window', testName, browser)
+            conf.responsiveTest('window', testName, browser, 0, true)
           })
       })
   }
