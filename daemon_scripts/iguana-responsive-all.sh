@@ -13,6 +13,7 @@ npm run clean-iguana iguana iguana-check-addcoin-modal.js skip
 npm run clean-iguana iguana_responsive iguana-signin-2-empty-wallets.js skip
 npm run clean-iguana iguana_responsive iguana-signin-add-2nd-wallet.js skip
 pkill Xvfb
+pkill iguana
 
 #for i in `seq 1 4`;
 #do

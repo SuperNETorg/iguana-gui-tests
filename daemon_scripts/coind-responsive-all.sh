@@ -22,6 +22,8 @@ npm run encrypt coind_responsive dashboard-check-receive-coin.js skip
 npm run encrypt2 coind_responsive dashboard-check-empty-nonempty-wallets.js skip
 npm run encrypt2 coind_responsive dashboard-check-2-nonempty-wallets.js skip
 pkill Xvfb
+pkill syscoind
+pkill dogecoind
 
 #for i in `seq 1 4`;
 #do
