@@ -11,6 +11,7 @@ sleep 6
 
 pkill iguana
 pkill chromedriver
+pkill java
 
 rm "daemon_scripts/bin/iguanacore/iguana/tmp/SYS" -rf
 rm "daemon_scripts/bin/iguanacore/iguana/DB/SYS" -rf

@@ -1,4 +1,6 @@
 pkill iguana
+pkill chromedriver
+pkill java
 
 if [ "$3" = "" ]; then
   rm "./screenshots" -rf
