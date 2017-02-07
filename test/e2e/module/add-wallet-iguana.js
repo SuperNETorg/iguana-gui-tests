@@ -32,6 +32,7 @@ module.exports = {
           })
           .verify.visible('.supported-coins-repeater-inner .coin.sys')
           .click('.supported-coins-repeater-inner .coin.sys')
+          .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
           .pause(10, function() {
             conf.responsiveTest('window', testName, browser, 0, true)

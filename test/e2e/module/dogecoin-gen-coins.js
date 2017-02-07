@@ -4,7 +4,7 @@ var conf = require('../../../nightwatch.conf.js'),
     exec = require('child_process').exec;
 
 module.exports = {
-  'test IguanaGUI execute mazacoin regtest generate': function(browser) {
+  'test IguanaGUI execute dogecoin regtest generate': function(browser) {
     browser
       .pause(100, function() {
         console.log('gen doge coins')

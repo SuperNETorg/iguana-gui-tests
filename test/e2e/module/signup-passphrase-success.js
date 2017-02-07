@@ -8,7 +8,7 @@ module.exports = {
     browser
       .click('.btn-add-account')
       .waitForElementVisible('.terms-conditionals-form')
-      .waitForElementVisible('.terms-conditionals-form .btn-terms-conditions-decline')
+      //.waitForElementVisible('.terms-conditionals-form .btn-terms-conditions-decline')
       .waitForElementVisible('.terms-conditionals-form .btn-terms-conditions-accept')
       .pause(10, function() {
         conf.responsiveTest('window', testName, browser, 0, true)
@@ -16,7 +16,7 @@ module.exports = {
       .click('.terms-conditionals-form .btn-terms-conditions-accept')
       .waitForElementVisible('.iguana-modal')
       .verify.cssClassPresent('.iguana-modal', 'msg-green')
-      .verify.containsText('.msg-body span', 'sys wallet is created. Login to access it.')
+      .verify.containsText('.msg-body span', 'sys, kmd are successfully created.')
       .pause(10, function() {
         conf.responsiveTest('window', testName, browser, 0)
       })

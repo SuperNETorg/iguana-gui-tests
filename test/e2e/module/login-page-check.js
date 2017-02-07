@@ -12,6 +12,5 @@ module.exports = {
       .pause(10, function() {
         conf.responsiveTest('window', 'login-page-check', browser, 0)
       })
-      .pause(4000)
   }
 };

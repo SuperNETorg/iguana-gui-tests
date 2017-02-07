@@ -19,10 +19,13 @@ module.exports = {
           .pause(10, function() {
             conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
           })
-          //.verify.cssClassPresent('.btn-next', 'disabled')
+          .getAttribute('.btn-next', 'disabled', function(result) {
+            console.log('button next should be disabled')
+            this.verify.equal(result.value, 'true')
+          })
           .click('.supported-coins-repeater-inner .coin.sys')
           .pause(250)
-          /*.verify.cssClassPresent('.supported-coins-repeater-inner .coin.sys', 'active')
+          .verify.cssClassPresent('.supported-coins-repeater-inner .coin.sys', 'active')
           .clearValue('.quick-search input[type=text]')
           .setValue('.quick-search input[type=text]', ['dogecoin'])
           .verify.visible('.supported-coins-repeater-inner .coin.doge')
@@ -32,7 +35,7 @@ module.exports = {
           .pause(10, function() {
             conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
           })
-          .click('.btn-next')*/
+          .click('.btn-next')
           .waitForElementNotPresent('.add-new-coin-form-login-state', 500)
           .pause(10, function() {
             conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)

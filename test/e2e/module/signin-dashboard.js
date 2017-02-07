@@ -17,11 +17,11 @@ module.exports = {
       })
       .click('.btn-signin-account')
       .pause(250)
-      .waitForElementVisible('.terms-conditionals-form')
+      /*.waitForElementVisible('.terms-conditionals-form')
       .pause(10, function() {
         conf.responsiveTest('.terms-conditionals-form .directives-text', testName, browser, 1)
       })
-      .click('.terms-conditionals-form .btn-terms-conditions-accept')
+      .click('.terms-conditionals-form .btn-terms-conditions-accept')*/
       .waitForElementVisible('.dashboard', 5000)
       .pause(10, function() {
         conf.responsiveTest('window', testName, browser, 2)

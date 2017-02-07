@@ -16,13 +16,12 @@ module.exports = {
         this.verify.equal(result.value, null)
       })
       .click('.btn-signin-account')
-      /*.pause(250)
-      .waitForElementVisible('.iguana-modal')
-      .verify.cssClassPresent('.iguana-modal', 'msg-green')
-      .verify.containsText('.msg-body span', 'SYS added')
+      .pause(250)
+      .waitForElementVisible('.terms-conditionals-form')
       .pause(10, function() {
-        responsiveTest('window')
-      })*/
+        conf.responsiveTest('.terms-conditionals-form .directives-text', testName, browser, 0, true)
+      })
+      .click('.terms-conditionals-form .btn-terms-conditions-accept')
       .waitForElementVisible('.dashboard')
       .pause(10, function() {
         conf.responsiveTest('window', testName, browser)

@@ -13,5 +13,6 @@ module.exports = {
       })
       .pause(250)
       .verify.urlEquals(conf.iguanaGuiURL + 'index.html#/dashboard')
+      .waitForElementVisible('.navbar-edex')
   }
 };

@@ -19,7 +19,10 @@ module.exports = {
           .pause(10, function() {
             conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
           })
-          .verify.cssClassPresent('.btn-next', 'disabled')
+          .getAttribute('.btn-next', 'disabled', function(result) {
+            console.log('button next should be disabled')
+            this.verify.equal(result.value, 'true')
+          })
           .click('.supported-coins-repeater-inner .coin.kmd')
           .pause(250)
           .verify.cssClassPresent('.supported-coins-repeater-inner .coin.kmd', 'active')
@@ -38,7 +41,10 @@ module.exports = {
           .pause(500)
           .verify.visible('.supported-coins-repeater-inner .coin.sys')
           .click('.supported-coins-repeater-inner .coin.sys')
-          .verify.cssClassNotPresent('.btn-next', 'disabled')
+          .getAttribute('.btn-next', 'disabled', function(result) {
+            console.log('button next should be disabled')
+            this.verify.equal(result.value, null)
+          })
           .verify.cssClassPresent('.supported-coins-repeater-inner .coin.sys', 'active')
           .pause(10, function() {
             conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
@@ -48,13 +54,6 @@ module.exports = {
           .pause(10, function() {
             conf.responsiveTest('.auth-add-coin-modal .modal-content', testName, browser)
           })
-          .pause(500)
-          .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(1) div:first-child', 'Komodo')
-          .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(1) div:last-child', 'KMD')
-          .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(2) div:first-child', 'Bitmark')
-          .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(2) div:last-child', 'BTM')
-          .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(3) div:first-child', 'Syscoin')
-          .verify.containsText('.login-add-coin-selection .ng-scope:nth-child(3) div:last-child', 'SYS')
       })
   }
 };
